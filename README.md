@@ -70,7 +70,7 @@ Team Members:
 # Norms  
 
 **Q4a:** How will your group handle situations when there is conflict in your group?  
-*If there is a conflict, we will discuss the situation before coming to take a vote on how to resolve it. 
+*If there is a conflict, we will discuss the situation before coming to take a vote on how to resolve it.\ 
 In the event of a tie, we will try to seek advice from a TA*
 
 **Q4b:** How will your group handle situations when a member is not contributing enough?   
