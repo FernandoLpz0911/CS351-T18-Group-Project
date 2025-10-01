@@ -63,17 +63,17 @@ Team Members:
 
 
 **Q3c:** What is your group’s expected response time to messages?  
-*Our expected response time will be within* 
+*Our expected response time will be within 1 to 2 days* 
 
 ---
 
 # Norms  
 
 **Q4a:** How will your group handle situations when there is conflict in your group?  
-*If there is a conflict, we will*
+*If there is a conflict, we will discuss the situation before coming to take a vote on how to resolve it*
 
 **Q4b:** How will your group handle situations when a member is not contributing enough?   
-*The team will handle the situation by*
+*The team will handle the situation by sending a reminder about the project*
 
 
 ---
