@@ -60,8 +60,10 @@ Team Members:
 **Q4a:** How will your group handle situations when there is conflict in your group?  
 *If there is a conflict, we will*
 
-**Q4b:** How will your group handle situations when a member is not contributing enough?  
-The team will handle the situation by
+**Q4b:** How will your group handle situations when a member is not contributing enough?   
+*The team will handle the situation by*
+
+
 ---
 
 # Roles  
