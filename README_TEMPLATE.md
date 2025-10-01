@@ -1,86 +1,65 @@
-# CS351-T18-Group-Project
-Group Project For Fall Semester 2025 @ UIC with Professor Patrick Troy
-
-Team Members:
-- Fernando Lopez
-- Sheldon Mui
-- Dominic Gentile
-- Anthony Martinez
-
 # Logistics  
 
 **Q1:** At what time in the week would your group be available to meet online?  
-
-We are available to meet:
-
-Our weekly meeting will be:
+**Example:**  
+*We are available to meet online on weekends from 12pm-8pm (12-2pm Saturday + Sunday), as well as from 4pm-6pm on Fridays.*  
+*Our weekly meeting will be Thursday 11am-12pm.*  
 
 ---
 
 # Timeline: Weekly Meeting Goals  
 
 **Q2:** What is your goals that your group want to achieve in each weekly meeting?  
+**Example:**  
+*Prior to 3/13: Weekly Meeting we will plan out some preliminary info/idea for the project itself ahead of the scheduled meeting like which data source/API and data structures we will use in our backend. We will browse [the given list of public APIs for inspiration](https://github.com/public-apis/public-apis).*  
 
-[Initial Prototype - Peer Review]
-Prior to 10/07:
-Prior to 10/14:
-Prior to 10/23:
+*During week of 3/25: Work on the project rough draft itself to make a functioning project with data input, data structure usage, and processing into output on the frontend.*  
 
-[Final Prototype - Instructor Review]
-Prior to 11/04:
-Prior to 11/11:
-Prior to 11/20:
-
-[Final Presentation - Project Submission]
-Subsequent to 11/20:
+*Prior to 4/17: Meet together weekly to target project weakpoints/bugs and possibly visit office hours to get guidance if the progress feels weak.*  
 
 ---
 
 # Communication  
 
 **Q3a:** How can your group communicate when doing the Full Stack Group Project?  
-Our group can communicate with each other through
-
 **Q3b:** What are the usernames of each group member on that platform?  
-The usernames for each group member are:
-
-Fernando - 
-Sheldon  - 
-Dominic  - 
-Anthony  - 
-
-
 **Q3c:** What is your group’s expected response time to messages?  
-Our expected response time will be within 
+
+**Example:**  
+*We will use Discord for communication*  
+
+*Usernames:*  
+*Justin - ghostmechanic*  
+*Claudia - ninth.py*  
+*Mauricio - itsperi*  
+*Our expected response time will be within 12 hours.*  
 
 ---
 
 # Norms  
 
 **Q4a:** How will your group handle situations when there is conflict in your group?  
-If there is a conflict, we will
-
 **Q4b:** How will your group handle situations when a member is not contributing enough?  
-The team will handle the situation by
+
+**Example:**  
+*If there is a disagreement on direction, we will resolve it with a unanimous vote.*  
+*If team members do not pull their weight, the team will politely remind them of their duties.*  
+*If they continue to not pull their weight, then they will get another warning and a chance to start being more productive.*  
+
 ---
 
 # Roles  
 
 **Q5:** How will your group divide your role in the Group Project?  
 
-Fernando - 
-Sheldon  - 
-Dominic  - 
-Anthony  - 
+**Example:**  
+*Mauricio - Backend, Justin - Project Lead, Claudia - Frontend.*  
 
 ---
 
 # Tech Stacks
 
 **Q6:** Which tech stacks will your group use? (Django + React or Flask + React)
-
-The tech stack our group will use is:
-
 
 ---
 # Full Stack Group Project Track  
@@ -143,3 +122,4 @@ The tech stack our group will use is:
 **Q7: Where will you deploy your project (e.g., Heroku, AWS, Render)? How will you manage environment variables and secrets during deployment?**
 
 **Q8: How will you ensure your deployment is reliable and easy to update?**
+
