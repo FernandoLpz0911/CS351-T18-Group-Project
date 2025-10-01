@@ -11,9 +11,9 @@ Team Members:
 
 **Q1:** At what time in the week would your group be available to meet online?  
 
-We are available to meet:
+*We are available to meet:*
 
-Our weekly meeting will be:
+*Our weekly meeting will be:*
 
 ---
 
@@ -21,57 +21,57 @@ Our weekly meeting will be:
 
 **Q2:** What is your goals that your group want to achieve in each weekly meeting?  
 
-[Initial Prototype - Peer Review]
-Prior to 10/07:
-Prior to 10/14:
-Prior to 10/23:
+*[Initial Prototype - Peer Review]*
+*Prior to 10/07:*
+*Prior to 10/14:*
+*Prior to 10/23:*
 
-[Final Prototype - Instructor Review]
-Prior to 11/04:
-Prior to 11/11:
-Prior to 11/20:
+*[Final Prototype - Instructor Review]*
+*Prior to 11/04:*
+*Prior to 11/11:*
+*Prior to 11/20:*
 
-[Final Presentation - Project Submission]
-Subsequent to 11/20:
+*[Final Presentation - Project Submission]*
+*Subsequent to 11/20:*
 
 ---
 
 # Communication  
 
 **Q3a:** How can your group communicate when doing the Full Stack Group Project?  
-Our group can communicate with each other through
+*Our group can communicate with each other through*
 
 **Q3b:** What are the usernames of each group member on that platform?  
-The usernames for each group member are:
+*The usernames for each group member are:*
 
-Fernando - 
-Sheldon  - 
-Dominic  - 
-Anthony  - 
+*Fernando - *
+*Sheldon  - *
+*Dominic  - *
+*Anthony  - *
 
 
 **Q3c:** What is your group’s expected response time to messages?  
-Our expected response time will be within 
+*Our expected response time will be within* 
 
 ---
 
 # Norms  
 
 **Q4a:** How will your group handle situations when there is conflict in your group?  
-If there is a conflict, we will
+*If there is a conflict, we will*
 
 **Q4b:** How will your group handle situations when a member is not contributing enough?  
-The team will handle the situation by
+*The team will handle the situation by *
 ---
 
 # Roles  
 
 **Q5:** How will your group divide your role in the Group Project?  
 
-Fernando - 
-Sheldon  - 
-Dominic  - 
-Anthony  - 
+*Fernando - *
+*Sheldon  - *
+*Dominic  - *
+*Anthony  - *
 
 ---
 
@@ -79,7 +79,7 @@ Anthony  -
 
 **Q6:** Which tech stacks will your group use? (Django + React or Flask + React)
 
-The tech stack our group will use is:
+*The tech stack our group will use is:*
 
 
 ---
