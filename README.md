@@ -53,11 +53,13 @@ Team Members:
 **Q3b:** What are the usernames of each group member on that platform?  
 *The usernames for each group member are:*
 
+|                   | Username              |
+|-------------------|-----------------------|
+| Fernando          | 
+| Sheldon           | 
+| Dominic           |
+| Anthony           |
 
-*Fernando - *
-*Sheldon  - *
-*Dominic  - *
-*Anthony  - *
 
 
 **Q3c:** What is your group’s expected response time to messages?  
@@ -80,10 +82,12 @@ Team Members:
 
 **Q5:** How will your group divide your role in the Group Project?  
 
-*Fernando - *
-*Sheldon  - *
-*Dominic  - *
-*Anthony  - *
+|                   | Role             |
+|-------------------|-----------------------|
+| Fernando          | 
+| Sheldon           | 
+| Dominic           |
+| Anthony           |
 
 ---
 
