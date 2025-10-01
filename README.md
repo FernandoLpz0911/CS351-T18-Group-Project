@@ -21,18 +21,27 @@ Team Members:
 
 **Q2:** What is your goals that your group want to achieve in each weekly meeting?  
 
+
+
 *[Initial Prototype - Peer Review]*
-*Prior to 10/07:*
-*Prior to 10/14:*
-*Prior to 10/23:*
+|Week               | Description           |
+|-------------------|-----------------------|
+| Prior to 10/07:   | 
+| Prior to 10/14:   | 
+| Prior to 10/23:   | 
 
 *[Final Prototype - Instructor Review]*
-*Prior to 11/04:*
-*Prior to 11/11:*
-*Prior to 11/20:*
+|Week               | Description           |
+|-------------------|-----------------------|
+| Prior to 11/04:   | 
+| Prior to 11/11:   | 
+| Prior to 11/20:   | 
+
 
 *[Final Presentation - Project Submission]*
-*Subsequent to 11/20:*
+|Week                | Description           |
+|--------------------|-----------------------|
+|Subsequent to 11/20:| 
 
 ---
 
@@ -43,6 +52,7 @@ Team Members:
 
 **Q3b:** What are the usernames of each group member on that platform?  
 *The usernames for each group member are:*
+
 
 *Fernando - *
 *Sheldon  - *
