@@ -19,7 +19,7 @@ Team Members:
 
 # Timeline: Weekly Meeting Goals  
 
-**Q2:** What is your goals that your group want to achieve in each weekly meeting?  
+**Q2:** What are the goals that your group wants to achieve in each weekly meeting?  
 
 
 
