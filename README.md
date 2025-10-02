@@ -51,7 +51,7 @@ Team Members:
 *Our group can communicate with each other through texts and phone calls.*
 
 **Q3b:** What are the usernames of each group member on that platform?  
-*There are no usernames for texts and phone calls.*\
+*There are no usernames for texts and phone calls.*
 
 **Q3c:** What is your group’s expected response time to messages?  
 *Our expected response time will be within 1 to 2 days.* 
