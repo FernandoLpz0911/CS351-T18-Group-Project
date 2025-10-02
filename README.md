@@ -75,10 +75,10 @@ Team Members:
 
 |                   | Role             |
 |-------------------|-----------------------|
-| Fernando          | 
-| Sheldon           | 
-| Dominic           | 
-| Anthony           | 
+| Fernando          | Project Lead
+| Sheldon           | Testing
+| Dominic           | Front-end
+| Anthony           | Back-end
 
 ---
 
@@ -143,16 +143,22 @@ Team Members:
 
 **Q4: Does your API key has limitations such as rate limits or downtime? How are you going to deal with that?**
 
-There's no limitations since it's local only.
+*There's no limitations since it's local only.*
 
 ## Authentication and Security
 
 **Q5: What authentication method will you use (e.g., username/password, OAuth, JWT)?**
 
+*We will end up using OAuth authentication since it's a common standard in regards to authentication with possible implementation of google auth with it.*
+
 **Q6: How will you store and protect sensitive user data (e.g., passwords, tokens)?**
+
+*We will store and protect by not storing passwords but hash again or some sort of similar hashing function. For tokens, we will use an cryptography that we haven't decided yet.*
 
 ## Deployment
 
 **Q7: Where will you deploy your project (e.g., Heroku, AWS, Render)? How will you manage environment variables and secrets during deployment?**
+*We will likely want to deploy ours using AWS or Github Pages, currently we're considering .gitignore or sensitive data protection API which helps tag sensitive information.*
 
 **Q8: How will you ensure your deployment is reliable and easy to update?**
+*We'll re-test and possibly add self-checks regarding information updating with automatic database management. The reliability would be a site tracker to see uptime and downtime.*
