@@ -107,9 +107,11 @@ Team Members:
 
 **Solution 2:** 
 
-**Problem 3:** 
+**Problem 3:**
+*Students struggle to find available and suitable study spaces on campus. They waste time walking between libraries and buildings only to find all spots taken, or they find a space that doesn't fit their needs (e.g., a noisy area, no power outlets, etc.).*
 
-**Solution 3:**  
+**Solution 3:**
+*A real-time study spot map web app that shows the current occupancy and amenities of campus study areas. Students can filter by location, noise level, group size, and availability of power outlets. The app utilizes crowd-sourced reports from students to update a space's "busyness" and environment, enabling everyone to find the ideal place to study.*
 
 # Track 3: Creative Coding and Cultural Expression
 
