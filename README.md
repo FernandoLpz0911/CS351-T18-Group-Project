@@ -123,13 +123,24 @@ to decide if it is likely they can find a power outlet (using the total seats av
 # Track 3: Creative Coding and Cultural Expression
 
 **Idea - Story - Inspiration 4:**
+UIC Campus Food Map/Explorer
+
+Food is a large part of what makes Chicago Unique and there is a large variety of it around the UIC Campus.
 
 **Implementation 4:**
+Build an app that curates cultural food spots around UIC.
+Each restaurant/dish comes with cultural history Ex: Pho and its role in Vietnam
+Add student reviews and personal cultural anecdotes that people could post
 
 **Idea - Story - Inspiration 5:**
+Interactive Music Wall
 
+Walking around UIC, you often hear different types of music from all over and wonder where it is from or how you could listen to it
 **Implementation 5:**
-
+Build an interactive “music wall” app where students can upload songs important to their culture.
+Each post could add comment/story to add significance
+users could sort by mood, language, country of origin
+have some sort of board that shows most viewed or liked songs/playlists
 
 # Idea Finalization
 
