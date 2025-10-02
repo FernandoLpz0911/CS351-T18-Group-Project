@@ -134,6 +134,20 @@ to decide if it is likely they can find a power outlet (using the total seats av
 # Idea Finalization
 
 **From 5 project ideas you have above, please choose one of the project that you are going with for the rest of the semester. Explain why you are going with that project**
+We will try to do the idea we had for Track 1: Tackling Generative AI Consequences
+with a program that allows AI image model trainers to determine if the datasets they have prepared contain
+unathorized IP material based of a SHA key fingerprint system.
+
+This project could be useful to change the current paradigmn of model training by allowing the
+IP owners to explicity define what media they own is allowed for AI training, if at all.
+
+Legally this may not have an effect (the legal situation is still being determined), but this will provide
+owners of IP a way to demonstrate to the public if a model trainer ignored their requests.
+
+Another use is that this could be used to catalog material deemed safe for AI image training, and could
+become a building block for future AI image models that attempt to respect the interests of the IP creators.
+Imagine an AI image model that is trained only on material that was given the green flag to do so, and making it the norm.
+This would be evidence that we can have AI models that will work even without needing unahtorized copyrighted material.
 
 # Extra Credit (Only do this if you are done with Idea Finalization)
 
