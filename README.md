@@ -134,6 +134,7 @@ to decide if it is likely they can find a power outlet (using the total seats av
 # Idea Finalization
 
 **From 5 project ideas you have above, please choose one of the project that you are going with for the rest of the semester. Explain why you are going with that project**
+\
 We will try to do the idea we had for Track 1: Tackling Generative AI Consequences
 with a program that allows AI image model trainers to determine if the datasets they have prepared contain
 unathorized IP material based of a SHA key fingerprint system.
