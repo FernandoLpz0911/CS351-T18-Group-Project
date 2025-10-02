@@ -48,19 +48,10 @@ Team Members:
 # Communication  
 
 **Q3a:** How can your group communicate when doing the Full Stack Group Project?  
-*Our group can communicate with each other through*
+*Our group can communicate with each other through texts and phone calls.*
 
 **Q3b:** What are the usernames of each group member on that platform?  
-*The usernames for each group member are:*
-
-|                   | Username              |
-|-------------------|-----------------------|
-| Fernando          | 
-| Sheldon           | 
-| Dominic           |
-| Anthony           |
-
-
+*There are no usernames for texts and phone calls. *\
 
 **Q3c:** What is your group’s expected response time to messages?  
 *Our expected response time will be within 1 to 2 days.* 
@@ -71,7 +62,7 @@ Team Members:
 
 **Q4a:** How will your group handle situations when there is conflict in your group?  
 *If there is a conflict, we will discuss the situation before coming to take a vote on how to resolve it.*\
-*In the event of a tie, we will try to seek advice from a TA*
+*In the event of a tie, we will try to seek advice from a TA.*
 
 **Q4b:** How will your group handle situations when a member is not contributing enough?   
 *The team will handle the situation by sending a reminder about the project.*
