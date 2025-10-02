@@ -10,16 +10,15 @@ Team Members:
 # Logistics  
 
 **Q1:** At what time in the week would your group be available to meet online?  
-
-*We are available to meet:*
-
-*Our weekly meeting will be:*
+*We are available to meet: Wednesdays at 11am to 1pm, Mondays at 3:30 to 6pm*
+*Our weekly meeting will be: Wednesdays at 11am to 1pm @ CDRLC Study Rooms*
 
 ---
 
 # Timeline: Weekly Meeting Goals  
 
 **Q2:** What are the goals that your group wants to achieve in each weekly meeting?  
+*Our goals will be to discuss systems requirements review initially, then as we develop give progress updates and any setbacks with request for help as needed.*
 
 
 
@@ -76,8 +75,8 @@ Team Members:
 
 |                   | Role             |
 |-------------------|-----------------------|
-| Fernando          | 
-| Sheldon           | 
+| Fernando          |
+| Sheldon           |
 | Dominic           |
 | Anthony           |
 
@@ -86,8 +85,7 @@ Team Members:
 # Tech Stacks
 
 **Q6:** Which tech stacks will your group use? (Django + React or Flask + React)
-
-*The tech stack our group will use is:*
+*The tech stack our group will use is: Django + React*
 
 
 ---
