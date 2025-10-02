@@ -10,8 +10,8 @@ Team Members:
 # Logistics  
 
 **Q1:** At what time in the week would your group be available to meet online?  
-*We are available to meet: Wednesdays at 11am to 1pm, Mondays at 3:30 to 6pm*
-*Our weekly meeting will be: Wednesdays at 11am to 1pm @ CDRLC Study Rooms*
+*We are available to meet:   Wednesdays at 11am to 1pm, Mondays at 3:30 to 6pm.*\
+*Our weekly meeting will be: Wednesdays at 11am to 1pm @ CDRLC Study Rooms.*
 
 ---
 
@@ -136,6 +136,7 @@ Add student reviews and personal cultural anecdotes that people could post
 Interactive Music Wall
 
 Walking around UIC, you often hear different types of music from all over and wonder where it is from or how you could listen to it
+
 **Implementation 5:**
 Build an interactive “music wall” app where students can upload songs important to their culture.
 Each post could add comment/story to add significance
@@ -167,14 +168,17 @@ This would be evidence that we can have AI models that will work even without ne
 # Database Design
 
 **Q1: What database are you using for your project (SQLite, PostgreSQL, noSQL, MongoDB,...), and why do you choose it?**
+\
 *We decided on using SQLite since it's a language we have begun to be familiarized through CS 341 and is a dedicated database which we can manage fully.*
 
 **Q2: How will database be helpful to your project? How will you design your database to support your application features?**
+\
 *It will directly be storing the images and their related image data. It's directly supporting the application in its process of storing and verifying IP of copyrighted works.*
 
 ## Third-Party API Integration
 
 **Q3: Which third-party API(s) will you integrate into your project? What data will you pull from the API(s), and how will you use it in your application?**
+\
 *We'll need to use a Cryptographic Hashing library (hashlib) to hash the image with the unique id specific to the artist. We will also need hexdigest() which can convert the hash into a hexadecimal string we can read, literally for converting backwards. We will also need the stegano library to embed the key into the images and to be able to extract it.*
 
 **Q4: Does your API key has limitations such as rate limits or downtime? How are you going to deal with that?**
