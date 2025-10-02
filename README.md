@@ -25,22 +25,22 @@ Team Members:
 *[Initial Prototype - Peer Review]*
 |Week               | Description           |
 |-------------------|-----------------------|
-| Prior to 10/07:   | 
-| Prior to 10/14:   | 
-| Prior to 10/23:   | 
+| Prior to 10/07:   | Systems Requirements Review
+| Prior to 10/14:   | Progress Check
+| Prior to 10/23:   | Minimum Viable Product Review
 
 *[Final Prototype - Instructor Review]*
 |Week               | Description           |
 |-------------------|-----------------------|
-| Prior to 11/04:   | 
-| Prior to 11/11:   | 
-| Prior to 11/20:   | 
+| Prior to 11/04:   | Adjustments of MVP
+| Prior to 11/11:   | Minor Feature Adjustments
+| Prior to 11/20:   | Verification of Systems
 
 
 *[Final Presentation - Project Submission]*
 |Week                | Description           |
 |--------------------|-----------------------|
-|Subsequent to 11/20:| 
+|Subsequent to 11/20:| Final Product Complete
 
 ---
 
@@ -77,8 +77,8 @@ Team Members:
 |-------------------|-----------------------|
 | Fernando          | Project Lead
 | Sheldon           | Testing
-| Dominic           | Front-end
-| Anthony           | Back-end
+| Dominic           | Back-end
+| Anthony           | Front-end
 
 ---
 
