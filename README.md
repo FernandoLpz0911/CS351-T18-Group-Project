@@ -40,7 +40,7 @@ Team Members:
 *[Final Presentation - Project Submission]*
 |Week                | Description           |
 |--------------------|-----------------------|
-|Subsequent to 11/20:| Final Product Complete
+|Subsequent to 11/20:| Final Product Complete, Prepare for Presentation
 
 ---
 
