@@ -84,7 +84,7 @@ Team Members:
 
 # Tech Stacks
 
-**Q6:** Which tech stacks will your group use? (Django + React or Flask + React)
+**Q6:** Which tech stacks will your group use (Django + React or Flask + React)? 
 *The tech stack our group will use is: Django + React*
 
 
