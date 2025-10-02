@@ -102,8 +102,17 @@ Team Members:
 # Track 2: Technology for Public Goods 
 
 **Problem 2:**
+Students at UIC often find out too late that a classroom has limited charging outlets,
+or that only desks in particular locations have outlets.
+
+This results in students sitting in locations with no way to keep their laptops charged.
 
 **Solution 2:** 
+We propose making a website that allows students to see an overview of the classroom they select with
+a visual indicator of where the power outlets are. 
+
+A total number of power outlets available could be provided to give an estimate to students
+to decide if it is likely they can find a power outlet (using the total seats available in the class section).
 
 **Problem 3:** 
 
