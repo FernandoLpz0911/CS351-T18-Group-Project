@@ -1,0 +1,24 @@
+/* UploadPage.css */
+
+.instruction-text {
+  font-size: 1.1rem;
+  font-style: italic;
+  text-align: center;
+  color: #666;
+}
+
+.upload-area {
+  border: 3px dashed #333;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.upload-placeholder {
+  color: #999;
+  font-size: 1.1rem;
+}

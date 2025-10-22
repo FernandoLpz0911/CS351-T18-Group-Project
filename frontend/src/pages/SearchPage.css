@@ -1,0 +1,169 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.App {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background: white;
+  padding: 1rem 2rem;
+  border-bottom: 2px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar h1 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.nav-links a:hover {
+  border-color: #333;
+}
+
+/* Shared page styles */
+.page-container {
+  padding: 3rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  width: 100%;
+}
+
+.screen-box {
+  background: white;
+  border: 3px solid #333;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.screen-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.field-label {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.image-box {
+  border: 2px solid #333;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  border-radius: 4px;
+}
+
+.image-box.large {
+  min-height: 300px;
+}
+
+.placeholder {
+  color: #999;
+  font-size: 1.2rem;
+}
+
+.placeholder.large {
+  font-size: 1.5rem;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+}
+
+.file-button {
+  padding: 0.75rem 1.5rem;
+  background: #333;
+  border: 2px solid #333;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.file-button:hover {
+  background: #555;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.action-button {
+  padding: 1rem 2rem;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.action-button:hover {
+  background: #555;
+  transform: translateY(-2px);
+}
+
+.back-link, .nav-link {
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem;
+  display: inline-block;
+  transition: all 0.3s;
+}
+
+.back-link:hover, .nav-link:hover {
+  color: #666;
+}
