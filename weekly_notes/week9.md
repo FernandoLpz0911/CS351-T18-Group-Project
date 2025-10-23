@@ -1,0 +1,8 @@
+Meeting 1:
+    Discussed what the project is about, there was concerns about the data structures. Sheldon had concerns in regards to which data structures we're going to use. We ended up coming to the agreement of using a merkle tree as a must for security of the image files and a skip list for faster access. We're still deciding on the last data structure. We also have an idea regarding the figma wireframe and is in development, Anthony is currently learning React and Dominic is learning more about the merkle tree and creating it. I am learning django and how it even functions in the background for the connection between front and backend.
+
+Meeting 2:
+    Discussed the last data structure but it's too close to the day so we 100% are not able to finish the data structure before the 1st demo. Anthony learned react already and Dominic has a strong understanding of the merkle and skip list so he's finishing that up. Sheldon finished the wireframe and Anthony is now working on that. I have an understanding of django on a high-level, i just need to learn how to utilize the data structures that are being made with it.
+
+Meeting 3:
+    Final meeting before the first demo, we all agreed the progress looks good which we were all concerned since we all were a bit slow to start uploading and our commits weren't frequent enough for how we should be developing. We definitely separated the tasks well and I was able to correct some things as needed. We have decided we'll make sure to commit more frequently so that it's not all in one go for next time. We used messages to send our data and are switching over to a discord server to organize the work better.
