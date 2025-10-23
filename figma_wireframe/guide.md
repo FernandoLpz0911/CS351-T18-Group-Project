@@ -24,15 +24,15 @@
 
 |                              |Figma Screenshots       |                       | 
 |---------------------------------------------|------------------------|-----------------------|
-|Upload Page Wireframe                        |[![uploadPageWireframe](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/main/figma_wireframe/images/uploadWireframe.png)](#features)||
-|Search Page Wireframe                        |[![searchPageWireframe](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/main/figma_wireframe/images/searchWireframe.png)](#features)||
-|Search Result Page Wireframe                 |[![searchResultPageWireframe](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/main/figma_wireframe/images/searchResultWireframe.png)](#features)||
-|Success Page (After Uploading) Wireframe     |[![successPage(AfterUpload)Wireframe](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/main/figma_wireframe/images/successWireframe.png)](#features)||
+|Upload Page Wireframe                        |[![uploadPageWireframe](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/figma_wireframe/images/uploadWireframe.png)](#features)||
+|Search Page Wireframe                        |[![searchPageWireframe](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/figma_wireframe/images/searchWireframe.png)](#features)||
+|Search Result Page Wireframe                 |[![searchResultPageWireframe](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/figma_wireframe/images/searchResultWireframe.png)](#features)||
+|Success Page (After Uploading) Wireframe     |[![successPage(AfterUpload)Wireframe](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/figma_wireframe/images/successWireframe.png)](#features)||
 |                                             |[](#features)||
-|Upload Page Mockup                           |[![uploadPageMockup](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/main/figma_wireframe/images/uploadMockup.png)](#features)||
-|Search Page Mockup                           |[![searchPageMockup](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/main/figma_wireframe/images/searchMockup.png)](#features)||
-|Search Result Page Mockup                    |[![searchResultPageMockup](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/main/figma_wireframe/images/searchResultMockup.png)](#features)||
-|Success Page (After Uploading) Mockup        |[![successPage(AfterUpload)mockUp](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/main/figma_wireframe/images/successMockup.png)](#features)||
+|Upload Page Mockup                           |[![uploadPageMockup](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/figma_wireframe/images/uploadMockup.png)](#features)||
+|Search Page Mockup                           |[![searchPageMockup](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/figma_wireframe/images/searchMockup.png)](#features)||
+|Search Result Page Mockup                    |[![searchResultPageMockup](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/figma_wireframe/images/searchResultMockup.png)](#features)||
+|Success Page (After Uploading) Mockup        |[![successPage(AfterUpload)mockUp](https://github.com/FernandoLpz0911/CS351-T18-Group-Project/blob/figma_wireframe/images/successMockup.png)](#features)||
 
 
 |Explaining why certain layouts, flows, or patterns were chosen and how does it helps the users||
