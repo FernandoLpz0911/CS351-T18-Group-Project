@@ -51,20 +51,3 @@
 |We're considering improvements in regards to base design from our figma design, and the security alongside potential runtime improvements.|
 
 
-
-
-|Explaining why certain layouts, flows, or patterns were chosen and how does it helps the users||
-|------------------------|-----------------------|
-|We have chosen to use Model-View-Controller (MVC) pattern for the backend and Mixin Pattern for the frontend. We have not structured the method however we have considered the research in regards to what we'll create. The reason we chose the design patterns is because it simplified the code and doesn't force dependencies so if something we to go wrong we can isolate it and adjust a small section without difficulty, making it easier to maintain.|
-
-
-|Any assumptions, limitations, or open questions your team still needs to resolve for the frontend||
-|------------------------|-----------------------|
-|Limitations would begin with upload limit, runtime of the watermarking, and webpage security. We have to consider upon it further|
-
-
-
-| Any future improvements or open questions your team is considering for the frontend||
-|------------------------|-----------------------|
-|We're considering improvements in regards to base design from our figma design, and the security alongside potential runtime improvements.|
-
