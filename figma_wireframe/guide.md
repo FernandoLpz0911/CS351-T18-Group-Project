@@ -1,4 +1,3 @@
-
 |Project Summary||
 |------------------------|-----------------------|
 |*Program that stores the artists images from the frontend, processed via django, and stored into SQL database with if they are fine with ai use or not, datetime created, and a SHA Key Fingerprint that's specific to the IP of the artist. Should also allow for viewing of images and their specific SHA Key Fingerprint Data. Kind of like Google Play Store developer SHA Key's but for Artist Works. Should contain the key even if scraped by AI and used elsewhere.*|    
@@ -18,34 +17,9 @@
 |The project is a image watermarking webpage where you upload the image and it returns the same image with a watermark that AI either cannot or has difficulty in deleting. The goal of it is to help artists while highlighting a problem in regards to ai that we can solve. Technical goals are to develop skills in regards to utilizing an advanced data structure, basic cryptography, and full connectivity between front and backend with potential to be fully deployed.|
 
 
-|Figma Link             |
+|Figma Link             ||
 |---------------------|-|
-|https://www.figma.com/design/McASF98g8sLLgzbtvASDEa/Art-Hash-Project?node-id=5-427&t=OerWEHJtTmucUoB1-1|
-
-
-
-|Project Summary||
-|------------------------|-----------------------|
-|*Program that stores the artists images from the frontend, processed via django, and stored into SQL database with if they are fine with ai use or not, datetime created, and a SHA Key Fingerprint that's specific to the IP of the artist. Should also allow for viewing of images and their specific SHA Key Fingerprint Data. Kind of like Google Play Store developer SHA Key's but for Artist Works. Should contain the key even if scraped by AI and used elsewhere.*|    
-
-
-
-|  Resources:            |                       |
-|------------------------|-----------------------|
-|Backend Design Patterns:|https://www.freecodecamp.org/news/design-pattern-for-modern-backend-development-and-use-cases/|
-|Frontend Design Patterns: |https://www.patterns.dev/|
-|Frontend    Mixin Pattern:|https://www.patterns.dev/vanilla/mixin-pattern/|
-
-
-
-|Brief description of project idea and goals| |
-|------------------------|-----------------------|
-|The project is a image watermarking webpage where you upload the image and it returns the same image with a watermark that AI either cannot or has difficulty in deleting. The goal of it is to help artists while highlighting a problem in regards to ai that we can solve. Technical goals are to develop skills in regards to utilizing an advanced data structure, basic cryptography, and full connectivity between front and backend with potential to be fully deployed.|
-
-
-|Figma Link             |
-|---------------------|-|
-|https://www.figma.com/design/McASF98g8sLLgzbtvASDEa/Art-Hash-Project?node-id=5-427&t=OerWEHJtTmucUoB1-1|
+|https://www.figma.com/design/McASF98g8sLLgzbtvASDEa/Art-Hash-Project?node-id=5-427&t=OerWEHJtTmucUoB1-1||
 
 
 |                              |Figma Screenshots       |                       | 
