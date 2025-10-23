@@ -7,6 +7,14 @@
   color: #666;
 }
 
+span {
+    color: black;
+}
+
+strong {
+    color: black;
+}
+
 .status-box {
   border: 2px solid #28a745;
   background: #d4edda;
@@ -40,6 +48,4 @@
   display: flex;
   justify-content: space-around;
   gap: 1rem;
-  padding-top: 1rem;
-  border-top: 2px solid #eee;
 }
