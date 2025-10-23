@@ -1,42 +1,49 @@
-# Contains the functions for http requests then spits out a response
+# api/views.py
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
+
+from django.shortcuts import get_object_or_404
 from .models import Block
 from .serializers import BlockSerializer
+from .merkleTree import hash_data
 from rest_framework.parsers import JSONParser, MultiPartParser
 
 class BlockViewSet(viewsets.ModelViewSet):
-    # This query retrieves all blocks, ordered by block_height descending
     queryset = Block.objects.all().order_by('-height') 
-    
-    # Links the view to your custom logic in BlockSerializer
     serializer_class = BlockSerializer
 
 class IDLookupView(APIView):
-
-    # Only allow POST requests for searching
     def post(self, request, *args, **kwargs):
-
-        # Get the hash/ID from the JSON request
         query_hash = request.data.get('query_hash')
         
         if not query_hash:
             return Response({'error': 'Missing query_hash'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Logic to search the database for the hash/ID
-        
-        # Mock Response for testing:
-        if query_hash == 'valid-hash-123':
-            return Response({'author': 'User Alpha', 'date_uploaded': '2025-10-22', 'block_hash': 'abcdef123...'})
-        else:
-            return Response({'error': 'Item not registered or invalid ID.'}, status=status.HTTP_404_NOT_FOUND)
+        try:
+
+            block_data = Block.objects.get(image_hash=query_hash) 
+            
+            # If found, prepare data for the frontend
+            serializer = BlockSerializer(block_data)
+            
+            response_data = {
+                 'author': block_data.items[0].split(':')[-1].strip(),
+                 'date_uploaded': block_data.timestamp.strftime('%Y-%m-%d %H:%M'),
+                 'image_url': block_data.registered_image.url if block_data.registered_image else None,
+                 'block_hash': serializer.data['merkle_root'], 
+                 'hash_key': block_data.image_hash 
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Block.DoesNotExist:
+            # 404 is the correct status if the resource (the block) isn't found
+            return Response({'error': f'Item not registered with hash/ID: {query_hash}.'}, 
+                            status=status.HTTP_404_NOT_FOUND)
 
 class FileCompareView(APIView):
-
-    # Allows receiving files
     parser_classes = [MultiPartParser] 
 
     def post(self, request, *args, **kwargs):
@@ -45,11 +52,29 @@ class FileCompareView(APIView):
         if not image_file:
             return Response({'error': 'Missing image file.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        #  Logic to calculate the hash of the uploaded image file
-        #  read the file contents and use hash_data function
+        try:
+            # Calculate the hash of the uploaded file content
+            file_content = image_file.read() 
+            calculated_hash = hash_data(file_content) # Use your utility function
 
-        # Logic to search the database for that calculated hash
+            # Search the database using the calculated hash
+            block_data = Block.objects.get(image_hash=calculated_hash)
+            
+            # If found, prepare data for the frontend
+            serializer = BlockSerializer(block_data)
 
-        # Mock Success Response for testing:
-        return Response({'author': 'User Beta', 'date_uploaded': '2025-10-21', 'block_hash': 'zyxwvu456...'})
+            response_data = {
+                 'author': block_data.items[0].split(':')[-1].strip(),
+                 'date_uploaded': block_data.timestamp.strftime('%Y-%m-%d %H:%M'),
+                 'image_url': block_data.registered_image.url if block_data.registered_image else None,
+                 'block_hash': serializer.data['merkle_root'], 
+                 'hash_key': block_data.image_hash 
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
 
+        except Block.DoesNotExist:
+            return Response({'error': 'File not found. Exact image was not registered.'}, 
+                            status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': f'An internal error occurred: {str(e)}'}, 
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR)
