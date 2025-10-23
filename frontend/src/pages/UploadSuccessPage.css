@@ -40,6 +40,4 @@
   display: flex;
   justify-content: space-around;
   gap: 1rem;
-  padding-top: 1rem;
-  border-top: 2px solid #eee;
 }
