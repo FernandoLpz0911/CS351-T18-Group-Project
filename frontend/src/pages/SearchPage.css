@@ -19,6 +19,18 @@ body {
   flex-direction: column;
 }
 
+.section-title {
+  color: black
+}
+
+.screen-title {
+  color: black
+}
+
+.field-label {
+  color: black
+}
+
 .navbar {
   background: white;
   padding: 1rem 2rem;

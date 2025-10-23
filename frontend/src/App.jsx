@@ -14,7 +14,6 @@ function App() {
           <div className="nav-links">
             <Link to="/">Search</Link>
             <Link to="/upload">Upload</Link>
-            <Link to="/result">Result (Demo)</Link>
             <Link to="/success">Success (Demo)</Link>
           </div>
         </nav>
