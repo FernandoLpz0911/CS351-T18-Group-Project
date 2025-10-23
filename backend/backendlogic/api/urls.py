@@ -1,6 +1,10 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import BlockViewSet
+
+router = DefaultRouter()
+router.register(r'blocks', BlockViewSet) 
 
 urlpatterns = [
-    path('api/', views.api, name='api'),
+    path('', include(router.urls)),
 ]

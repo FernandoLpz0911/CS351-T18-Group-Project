@@ -2,7 +2,7 @@
 
 from django.db import models
 
-class Data(models.Model):
+class Block(models.Model):
     # items to put inside merkle tree
     items = models.JSONField()
 
