@@ -7,12 +7,13 @@ Resources:
     
 
 – A brief description of your project idea and goals
-    - The project is a image watermarking webpage where you upload the image and it returns the same image with a watermark that AI either cannot or has difficulty in deleting. The goal of it is to help artists while highlighting a problem in regards to ai that we can solve. Technical goals are to develop skills in regards to utilizing an advanced data structure, basic cryptography, and full connectivity between front and backend with potential to be fully deployed.
+    - The project is a image watermarking webpage where you upload the image and it returns the same image with a watermark 
+    that AI either cannot or has difficulty in deleting. The goal of it is to help artists while highlighting a problem in regards to ai that we can solve. Technical goals are to develop skills in regards to utilizing an advanced data structure, basic cryptography, and full connectivity between front and backend with potential to be fully deployed.
 
 – Include both the screenshot of from your Figma wireframe and the link to the Figma
 project
-    ### MISSING
-
+    https://www.figma.com/design/McASF98g8sLLgzbtvASDEa/Art-Hash-Project?node-id=5-427&t=OerWEHJtTmucUoB1-1
+    
 – Explaining why certain layouts, flows, or patterns were chosen and how does it helps the users
     - We have chosen to use Model-View-Controller (MVC) pattern for the backend and Mixin Pattern for the frontend. We have not structured the method however we have considered the research in regards to what we'll create. The reason we chose the design patterns is because it simplified the code and doesn't force dependencies so if something we to go wrong we can isolate it and adjust a small section without difficulty, making it easier to maintain.
 
