@@ -1,0 +1,237 @@
+/* HomePage.css - Styles specific to the landing/home page */
+
+/* ========== MAIN CONTENT CONTAINER ========== */
+/* Container for all home page content */
+.home-content {
+  width: 100%;
+  max-width: 1200px;  /* Don't get too wide on large screens */
+  padding: 2rem;
+}
+
+/* ========== HERO SECTION ========== */
+/* The big headline and subtitle at the top of the page */
+.hero-section {
+  text-align: center;
+  margin-bottom: 4rem;  /* Space below */
+  padding: 3rem 0;
+}
+
+/* Main headline */
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;  /* Tighter line spacing */
+}
+
+/* Subtitle text below the headline */
+.hero-subtitle {
+  font-size: 1.3rem;
+  color: #666;  /* Gray text */
+  max-width: 700px;  /* Keep it from getting too wide */
+  margin: 0 auto;  /* Center it */
+  line-height: 1.6;
+}
+
+/* ========== FEATURES GRID ========== */
+/* Grid of 4 feature cards */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Responsive columns */
+  gap: 2rem;  /* Space between cards */
+  margin-bottom: 4rem;
+}
+
+/* Individual feature card */
+.feature-card {
+  background: white;
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;  /* Smooth hover animation */
+}
+
+/* When hovering over a card, lift it up and add shadow */
+.feature-card:hover {
+  transform: translateY(-5px);  /* Move up 5 pixels */
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);  /* Add shadow */
+}
+
+/* The emoji icon at top of each card */
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Feature card title */
+.feature-card h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+/* Feature card description text */
+.feature-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ========== CALL TO ACTION SECTION ========== */
+/* The "Get Started" section with big buttons */
+.cta-section {
+  text-align: center;
+  background: white;
+  border: 3px solid #333;
+  border-radius: 8px;
+  padding: 3rem;
+  margin-bottom: 4rem;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* "Get Started" heading */
+.cta-section h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+/* Container for the two buttons */
+.cta-buttons {
+  display: flex;
+  gap: 1.5rem;  /* Space between buttons */
+  justify-content: center;  /* Center the buttons */
+  flex-wrap: wrap;  /* Wrap to new line on small screens */
+}
+
+/* Both call-to-action buttons */
+.cta-button {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;  /* Remove underline */
+  border-radius: 4px;
+  transition: all 0.3s;
+  border: 2px solid #333;
+}
+
+/* Primary button (Register Your Artwork) - dark background */
+.cta-button.primary {
+  background: #333;
+  color: white;
+}
+
+/* When hovering over primary button */
+.cta-button.primary:hover {
+  background: #555;  /* Lighten slightly */
+  transform: translateY(-2px);  /* Lift up */
+}
+
+/* Secondary button (Search Registry) - white background */
+.cta-button.secondary {
+  background: white;
+  color: #333;
+}
+
+/* When hovering over secondary button */
+.cta-button.secondary:hover {
+  background: #f0f0f0;  /* Light gray */
+  transform: translateY(-2px);  /* Lift up */
+}
+
+/* ========== HOW IT WORKS SECTION ========== */
+/* The step-by-step explanation at the bottom */
+.info-section {
+  background: white;
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 2.5rem;
+}
+
+/* "How It Works" heading */
+.info-section h3 {
+  font-size: 1.8rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+/* Container for all steps */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;  /* Space between steps */
+}
+
+/* Individual step */
+.step {
+  display: flex;
+  align-items: flex-start;  /* Align items to top */
+  gap: 1.5rem;  /* Space between number and content */
+}
+
+/* Circle with step number (1, 2, 3) */
+.step-number {
+  background: #333;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;  /* Make it a perfect circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex-shrink: 0;  /* Don't let it get squished */
+}
+
+/* Container for step text */
+.step-content {
+  flex: 1;  /* Take up remaining space */
+}
+
+/* Step title */
+.step-content h4 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+/* Step description */
+.step-content p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+/* Adjustments for mobile devices (screens smaller than 768px) */
+@media (max-width: 768px) {
+  /* Smaller headline on mobile */
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  /* Smaller subtitle on mobile */
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  /* Stack feature cards in single column */
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stack CTA(call to action) buttons vertically */
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;  /* Make buttons full width */
+  }
+
+  /* Stack step number and content vertically */
+  .step {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+}

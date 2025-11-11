@@ -1,35 +1,36 @@
-/* SearchResultPage.css */
+/* SearchResultPage.css - Styles specific to the search results page */
 
-.ownership-text {
-  font-size: 1.2rem;
-  font-style: italic;
-  text-align: center;
-  color: #666;
-}
-
+/* ========== INFO SECTION ========== */
+/* Container for artwork information (author, date, hash) */
 .info-section {
   border: 2px solid #333;
   border-radius: 4px;
   padding: 1rem;
-  background: #fafafa;
+  background: #fafafa;  /* Light gray background */
 }
 
+/* ========== INFO ROWS ========== */
+/* Each row shows a label and value (like "Author: John Doe") */
 .info-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;  /* Put label on left, value on right */
   padding: 0.75rem 0;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;  /* Light gray line between rows */
 }
 
+/* Remove border from last row */
 .info-row:last-child {
   border-bottom: none;
 }
 
+/* ========== LABELS AND VALUES ========== */
+/* Label text (like "Author:", "Date uploaded:") */
 .info-label {
   font-weight: bold;
   color: #666;
 }
 
+/* Value text (like "John Doe", "2024-01-15") */
 .info-value {
   color: #666;
 }

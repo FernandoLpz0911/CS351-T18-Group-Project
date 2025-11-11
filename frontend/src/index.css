@@ -1,68 +1,40 @@
+/* index.css - Base styles that apply to the entire application */
+/* This file sets up the foundation before any other styles are applied */
+
+/* ========== ROOT ELEMENT ========== */
+/* Configure the base settings for the HTML root element */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Arial, sans-serif;  /* Default font for the whole site */
+  line-height: 1.5;  /* Space between lines of text */
+  font-weight: 400;  /* Normal font weight */
+  
+  /* Font rendering optimizations for smoother text */
+  font-synthesis: none;  /* Don't artificially bold/italicize */
+  text-rendering: optimizeLegibility;  /* Better text quality */
+  -webkit-font-smoothing: antialiased;  /* Smoother fonts on Mac/iOS */
+  -moz-osx-font-smoothing: grayscale;  /* Smoother fonts on Firefox Mac */
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* ========== GLOBAL RESETS ========== */
+/* Remove default spacing and use consistent box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  /* Width/height includes padding and border */
 }
 
+/* ========== BODY ELEMENT ========== */
+/* Base styles for the body element */
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+  min-width: 320px;  /* Don't let page get narrower than 320px */
+  min-height: 100vh;  /* At least full screen height */
+}
+
+/* ========== ROOT CONTAINER ========== */
+/* The main React root element that contains your app */
+#root {
+  width: 100%;
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

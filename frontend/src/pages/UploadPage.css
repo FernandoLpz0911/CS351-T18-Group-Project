@@ -1,24 +1,21 @@
-/* UploadPage.css */
+/* UploadPage.css - Styles specific to the upload/register page */
 
-.instruction-text {
-  font-size: 1.1rem;
-  font-style: italic;
-  text-align: center;
-  color: #666;
-}
-
+/* ========== UPLOAD AREA ========== */
+/* The box where image preview appears */
 .upload-area {
-  border: 3px dashed #333;
+  border: 3px dashed #333;  /* Dashed border to indicate it's a drop zone */
   min-height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fafafa;
+  background: #fafafa;  /* Light gray background */
   border-radius: 4px;
   padding: 1rem;
 }
 
+/* ========== UPLOAD PLACEHOLDER ========== */
+/* Text shown when no image is selected */
 .upload-placeholder {
-  color: #999;
+  color: #999;  /* Gray text */
   font-size: 1.1rem;
 }

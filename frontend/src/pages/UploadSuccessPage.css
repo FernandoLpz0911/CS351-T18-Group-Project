@@ -1,45 +1,59 @@
-/* UploadSuccessPage.css */
+/* UploadSuccessPage.css - Styles specific to the upload success page */
 
-.success-message {
-  font-size: 1.1rem;
-  font-style: italic;
-  text-align: center;
-  color: #666;
-}
-
+/* ========== SUCCESS STATUS BOX ========== */
+/* Green box showing "Upload Successful" message */
 .status-box {
-  border: 2px solid #28a745;
-  background: #d4edda;
+  border: 2px solid #28a745;  /* Green border */
+  background: #d4edda;  /* Light green background */
   padding: 1.5rem;
   border-radius: 4px;
   text-align: center;
 }
 
+/* Success message text */
 .status-text {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #155724;
+  color: #155724;  /* Dark green text */
 }
 
-.download-label {
-  font-size: 1.1rem;
-  text-align: center;
-  font-weight: 600;
+/* ========== INFO DETAILS ========== */
+/* Container for hash key information */
+.info-details {
   color: #333;
 }
 
+/* Make sure text inside info-details is black */
+.info-details span,
+.info-details strong {
+  color: #333;
+}
+
+/* ========== DOWNLOAD BUTTON ========== */
+/* Special styling for the download button (green theme) */
 .action-button.download {
-  background: #28a745;
+  background: #28a745;  /* Green background */
 }
 
 .action-button.download:hover {
-  background: #218838;
+  background: #218838;  /* Darker green on hover */
 }
 
-.nav-links {
-  display: flex;
-  justify-content: space-around;
-  gap: 1rem;
-  padding-top: 1rem;
-  border-top: 2px solid #eee;
+/* ========== COPY BUTTON ========== */
+/* Button to copy hash key to clipboard */
+.copy-button {
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  background: #f0f0f0;  /* Light gray by default */
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+/* When button is disabled */
+.copy-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;  /* Make it look faded */
 }
