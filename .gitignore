@@ -1,0 +1,4 @@
+backend/backendlogic/api/__pycache__/
+backend/backendlogic/api/migrations/__pycache__/
+backend/backendlogic/backendlogic/__pycache__/
+venv/
