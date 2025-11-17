@@ -29,3 +29,23 @@ goto/open   "/backend/backendlogic"           (without quotes) in terminal
 run command "python3 manage.py runserver"     (without quotes) in terminal, NOTE: if python3 doesn't work, use python
 
 Now, both the frontend and backend should be running.
+
+
+
+
+The following may depend on your local system (If the ports are already in use, it will differ, check your terminal)
+
+frontend should accessible at:
+http://localhost:5173/
+
+backend should be accessible at:
+http://127.0.0.1:8000/api/
+http://127.0.0.1:8000/admin
+
+NOTE: To access the admin for backend you must create a superuser
+
+run command "python manage.py createsuperuser" or "python3 manage.py createsuperuser"
+
+it will prompt you to create a username and password, (email is optional).
+
+Use the newly created credetials to access admin page if desired.
