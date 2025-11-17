@@ -12,7 +12,7 @@ goto/open   "frontend/"      (without quotes) in terminal
 run command "npm install"    (without quotes) in terminal
 run command "npm audit fix"  (if required by terminal and without quotes) in terminal
 
-recommended you create and use venv for anything pip/python related
+it's recommended you create and use venv for anything pip/python related
 
 goto/open root of project folder
 run command  "pip install -r requirements.txt" (without quotes) in terminal
