@@ -44,6 +44,7 @@ http://127.0.0.1:8000/admin
 
 NOTE: To access the admin for backend you must create a superuser
 
+goto/open   "/backend/backendlogic"           (without quotes) in terminal
 run command "python manage.py createsuperuser" or "python3 manage.py createsuperuser"
 
 it will prompt you to create a username and password, (email is optional).
