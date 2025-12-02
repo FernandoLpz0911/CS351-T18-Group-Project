@@ -38,7 +38,8 @@ Make sure you have the following installed:
 9. Open new terminal
 10. goto/open   "/backend/backendlogic"           (without quotes) in terminal
 11. run command "python3 manage.py runserver"     (without quotes) in terminal
-12. NOTE: if  python3 doesn't work, use python
+
+**NOTE: if  python3 doesn't work, use python**
 
 Now, both the frontend and backend should be running.
 
