@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SearchPage.css';
 
-// API endpoint for searching
-const SEARCH_API_URL = 'http://127.0.0.1:8000/api/search/'; 
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+const SEARCH_API_URL = `${BASE_URL}/api/search/`;
 
 function SearchPage() {
   // State variables to track user input and search status

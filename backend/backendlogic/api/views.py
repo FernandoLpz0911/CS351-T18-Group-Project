@@ -10,10 +10,26 @@ from .models import Block
 from .serializers import BlockSerializer
 from .merkleTree import hash_data
 from rest_framework.parsers import JSONParser, MultiPartParser
+from django.db import IntegrityError
 
 class BlockViewSet(viewsets.ModelViewSet):
     queryset = Block.objects.all().order_by('-height') 
     serializer_class = BlockSerializer
+
+    def create(self, request, *args, **kwargs):
+        try:
+            # Try to create the block
+            return super().create(request, *args, **kwargs)
+        except IntegrityError as e:
+
+            # If already exists, return error
+            if 'image_hash' in str(e):
+                return Response(
+                    {'error': 'This image has already been registered in the system.'},
+                    status=status.HTTP_409_CONFLICT
+                )
+            # If it's some other db error, crash normally
+            raise e
 
 class IDLookupView(APIView):
     def post(self, request, *args, **kwargs):

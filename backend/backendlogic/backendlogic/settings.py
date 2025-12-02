@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +30,7 @@ SECRET_KEY = 'django-insecure-ao=xn4u%0+3dgf$-#^59rh1n49^-1*nk(_+eeqav0r=$x43g(2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cs351-t18-group-project.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -87,6 +89,10 @@ DATABASES = {
     }
 }
 
+# on render use PostgreSQL
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -129,10 +135,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
-
-
-
-#### ADJUST THIS BEFORE PRODUCTION, THIS ALLOWS ANY PORT ACCESS
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",             
+    "http://127.0.0.1:5173",             
+    "https://ai-watermark-registry.vercel.app"
+]
