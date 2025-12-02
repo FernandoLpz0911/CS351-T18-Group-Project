@@ -70,13 +70,24 @@ function UploadPage() {
       navigate('/success', { state: { blockData: response.data } });
 
     } catch (error) {
-      // If error, show error message
       console.error('Upload failed:', error.response?.data || error.message);
-      const errorMessage = error.response?.data?.non_field_errors?.[0] || 'Upload failed due to a server error.';
+      
+      // 1. Check for the specific "error" key we sent from the backend
+      let errorMessage = error.response?.data?.error;
+
+      // 2. If not found, check for Django's default "non_field_errors"
+      if (!errorMessage) {
+          errorMessage = error.response?.data?.non_field_errors?.[0];
+      }
+
+      // 3. If still nothing, show a generic fallback
+      if (!errorMessage) {
+          errorMessage = 'Upload failed due to a server error.';
+      }
+
       setUploadError(errorMessage);
       
     } finally {
-      // Always turn off loading state when done
       setIsUploading(false);
     }
   };
