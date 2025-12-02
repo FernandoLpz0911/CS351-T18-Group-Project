@@ -9,6 +9,8 @@ import SearchPage from './pages/SearchPage';
 import UploadPage from './pages/UploadPage';
 import SearchResultPage from './pages/SearchResultPage';
 import UploadSuccessPage from './pages/UploadSuccessPage';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
 
 function App() {
   // State to track if the sidebar menu is open or closed
@@ -70,6 +72,10 @@ function App() {
               <span className="menu-icon-text">📝</span>
               Register Artwork
             </Link>
+            <Link to="/login" onClick={closeMenu}>
+              <span className="menu-icon-text">🔐</span>
+              Login
+            </Link>
           </nav>
           
           {/* Footer section with branding and tagline */}
@@ -92,6 +98,8 @@ function App() {
           <Route path="/upload" element={<UploadPage />} />
           <Route path="/result" element={<SearchResultPage />} />
           <Route path="/success" element={<UploadSuccessPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
         </Routes>
       </div>
     </Router>
