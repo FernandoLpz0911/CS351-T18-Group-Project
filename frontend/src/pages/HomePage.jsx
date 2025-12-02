@@ -8,18 +8,12 @@ function HomePage() {
   return (
     <div className="page-container">
       <div className="home-content">
-        
-        {/* ========== HERO SECTION ========== */}
-        {/* Big headline and subtitle at the top */}
         <div className="hero-section">
           <h1 className="hero-title">Protect Your Art from AI Infringement</h1>
           <p className="hero-subtitle">
             Register your artwork with cryptographic fingerprints to prove ownership and control AI usage rights
           </p>
         </div>
-
-        {/* ========== FEATURES GRID ========== */}
-        {/* Four cards explaining the main features */}
         <div className="features-grid">
           
           {/* Feature 1: Secure Registration */}

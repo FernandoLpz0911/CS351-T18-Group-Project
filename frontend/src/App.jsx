@@ -11,6 +11,7 @@ import SearchResultPage from './pages/SearchResultPage';
 import UploadSuccessPage from './pages/UploadSuccessPage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
+import UserDashboard from './pages/UserDashboard';
 
 function App() {
   // State to track if the sidebar menu is open or closed
@@ -29,28 +30,21 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* ========== NAVBAR ========== */}
-        {/* Top navigation bar with hamburger menu and brand name */}
         <nav className="navbar">
           <div className="navbar-left">
-            {/* Hamburger menu button - three horizontal lines */}
             <button className="menu-button" onClick={toggleMenu} aria-label="Menu">
               <span className="menu-icon"></span>
               <span className="menu-icon"></span>
               <span className="menu-icon"></span>
             </button>
             
-            {/* Brand name - clicking takes you home */}
             <Link to="/" style={{ textDecoration: 'none' }}>
               <h1>ArtGuard Registry</h1>
             </Link>
           </div>
         </nav>
 
-        {/* ========== SIDEBAR MENU ========== */}
-        {/* Sliding menu that appears from the left when hamburger is clicked */}
         <div className={`sidebar ${menuOpen ? 'open' : ''}`}>
-          {/* Menu header with title and close button */}
           <div className="sidebar-header">
             <h2>Menu</h2>
             <button className="close-button" onClick={closeMenu} aria-label="Close menu">
@@ -58,11 +52,14 @@ function App() {
             </button>
           </div>
           
-          {/* Navigation links - clicking any link closes the menu and navigates */}
           <nav className="sidebar-nav">
             <Link to="/" onClick={closeMenu}>
               <span className="menu-icon-text">🏠</span>
               Home
+            </Link>
+            <Link to="/dashboard" onClick={closeMenu}>
+              <span className='menu-icon-text'>📁</span>
+              Dashboard
             </Link>
             <Link to="/search" onClick={closeMenu}>
               <span className="menu-icon-text">🔍</span>
@@ -74,7 +71,7 @@ function App() {
             </Link>
             <Link to="/login" onClick={closeMenu}>
               <span className="menu-icon-text">🔐</span>
-              Login
+              Login/Register
             </Link>
           </nav>
           
@@ -85,13 +82,8 @@ function App() {
           </div>
         </div>
 
-        {/* ========== DARK OVERLAY ========== */}
-        {/* Semi-transparent background that appears when menu is open */}
-        {/* Clicking it closes the menu */}
         {menuOpen && <div className="overlay" onClick={closeMenu}></div>}
 
-        {/* ========== ROUTES ========== */}
-        {/* Define which component shows for each URL path */}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/search" element={<SearchPage />} />
@@ -100,6 +92,7 @@ function App() {
           <Route path="/success" element={<UploadSuccessPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/dashboard" element={<UserDashboard />} />
         </Routes>
       </div>
     </Router>

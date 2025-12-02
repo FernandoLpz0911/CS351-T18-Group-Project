@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './SignUpPage.css'; // Reusing the same CSS
+import './SignUpPage.css'; // Reusing existing styles
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 
@@ -19,20 +19,19 @@ function LoginPage() {
     setIsLoading(true);
 
     try {
-      // Request token from Django
       const response = await axios.post(`${BASE_URL}/api/login/`, {
         username: username,
         password: password
       });
 
-      // Save token to LocalStorage
+      // Save token AND the full name
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem('username', response.data.username);
+      localStorage.setItem('fullName', response.data.full_name); // <--- Critical Update
       
       console.log('Login successful');
       
-      // Force a hard reload so the App/Navbar can update state (if you implemented that)
-      // Otherwise, standard navigation is fine: navigate('/');
+      // Force reload to update navigation state
       window.location.href = '/'; 
 
     } catch (err) {

@@ -17,6 +17,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from .serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.decorators import action
 
 class RegisterUserView(APIView):
     def post(self, request):
@@ -27,7 +28,8 @@ class RegisterUserView(APIView):
             return Response({
                 'token': token.key,
                 'user_id': user.pk,
-                'email': user.email
+                'email': user.email,
+                'full_name': f"{user.first_name} {user.last_name}"
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
@@ -37,21 +39,36 @@ class CustomAuthToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
+        
+        # Return the full name so the frontend can display it
         return Response({
             'token': token.key,
             'user_id': user.pk,
-            'username': user.username
+            'username': user.username,
+            'full_name': f"{user.first_name} {user.last_name}"
         })
 
 class BlockViewSet(viewsets.ModelViewSet):
-    queryset = Block.objects.all().order_by('-height') 
+    queryset = Block.objects.all().order_by('-height')
     serializer_class = BlockSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
+        user = self.request.user
+        full_legal_name = f"{user.first_name} {user.last_name}"
+        
+        serializer.save(owner=user, legal_name=full_legal_name)
 
-        # Auto set owner to current signed in user
-        serializer.save(owner=self.request.user)
+    # getter for the user to get all hashes owned by user
+    @action(detail=False, methods=['get'])
+    def mine(self, request):
+        """Returns only blocks owned by the logged-in user"""
+        if not request.user.is_authenticated:
+            return Response({"error": "Not logged in"}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        my_blocks = Block.objects.filter(owner=request.user).order_by('-timestamp')
+        serializer = self.get_serializer(my_blocks, many=True)
+        return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
         try:

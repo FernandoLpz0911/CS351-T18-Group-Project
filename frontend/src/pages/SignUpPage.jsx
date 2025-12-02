@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// You can copy UploadPage.css to SignUpPage.css for consistent styling
-import './SignUpPage.css'; 
+import './SignUpPage.css';
 
-// Use the environment variable for the API URL
+// Use environment variable for URL
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 
 function SignUpPage() {
+  // New state for names
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
@@ -22,7 +26,6 @@ function SignUpPage() {
     setError('');
     setIsLoading(true);
 
-    // Basic client-side validation
     if (password !== confirmPassword) {
       setError('Passwords do not match!');
       setIsLoading(false);
@@ -30,28 +33,29 @@ function SignUpPage() {
     }
 
     try {
-      // Send registration data to Django
+      // Send all registration data including legal name
       const response = await axios.post(`${BASE_URL}/api/register/`, {
         username: username,
         email: email,
-        password: password
+        password: password,
+        first_name: firstName, // Sent to backend
+        last_name: lastName    // Sent to backend
       });
 
-      // Save the received token to LocalStorage
+      // Automatically log the user in by saving their new token
       localStorage.setItem('authToken', response.data.token);
-      localStorage.setItem('username', username); // Optional: save username for UI
+      localStorage.setItem('username', username);
+      localStorage.setItem('fullName', response.data.full_name); // Save the verified name!
       
       console.log('Registration successful:', response.data);
       alert('Account created successfully!');
       
-      // Redirect to the home page
       navigate('/'); 
       
     } catch (err) {
       console.error('Registration failed:', err.response?.data || err.message);
-      // Try to show a specific error message from the server, otherwise generic
       const serverError = err.response?.data?.username?.[0] || err.response?.data?.password?.[0];
-      setError(serverError || 'Registration failed. Username or Email may be taken.');
+      setError(serverError || 'Registration failed. Please check your details.');
     } finally {
       setIsLoading(false);
     }
@@ -59,13 +63,38 @@ function SignUpPage() {
 
   return (
     <div className="page-container">
-      <div className="screen-box" style={{ maxWidth: '400px' }}>
+      <div className="screen-box" style={{ maxWidth: '500px' }}>
         <h2 className="screen-title">Create Account</h2>
         
         <div className="content">
           {error && <div style={{ color: 'red', textAlign: 'center', marginBottom: '1rem' }}>{error}</div>}
 
           <form onSubmit={handleSignUp} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            
+            {/* NEW: Legal Name Section */}
+            <div style={{display: 'flex', gap: '1rem'}}>
+                <div style={{flex: 1}}>
+                    <label className="field-label">First Name (Legal):</label>
+                    <input 
+                        type="text" 
+                        className="text-input" 
+                        value={firstName} 
+                        onChange={(e) => setFirstName(e.target.value)} 
+                        required 
+                    />
+                </div>
+                <div style={{flex: 1}}>
+                    <label className="field-label">Last Name (Legal):</label>
+                    <input 
+                        type="text" 
+                        className="text-input" 
+                        value={lastName} 
+                        onChange={(e) => setLastName(e.target.value)} 
+                        required 
+                    />
+                </div>
+            </div>
+
             <div>
               <label className="field-label">Username:</label>
               <input

@@ -27,6 +27,8 @@ class Block(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    legal_name = models.CharField(max_length=255, help_text="Full Legal Name of the Rights Holder")
+    ai_consent = models.BooleanField(default=False, help_text="Do you consent to AI training on this image?")
 
 def __str__(self):
-        return f"height #{self.height}"
+        return f"Block #{self.height} - {self.legal_name}"
