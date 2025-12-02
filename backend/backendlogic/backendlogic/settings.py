@@ -142,6 +142,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://ai-watermark-registry.vercel.app"
 ]
 
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://ai-watermark-registry.*\.vercel\.app$",
+]
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
