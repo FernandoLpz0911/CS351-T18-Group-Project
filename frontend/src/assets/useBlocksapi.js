@@ -2,8 +2,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';  // handleds http requests to use for django
 
-// base api url just to be able to use it
-const API_URL = 'http://127.0.0.1:8000/api/blocks/';
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+const API_URL = `${BASE_URL}/api/blocks/`;
+
 
 // cet the states of the api items
 const useBlocksApi = () => {

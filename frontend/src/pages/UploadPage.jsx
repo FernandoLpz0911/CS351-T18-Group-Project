@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './UploadPage.css';
 
-// API endpoint for uploading artwork
-const UPLOAD_API_URL = 'http://127.0.0.1:8000/api/blocks/'; 
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+const SEARCH_API_URL = `${BASE_URL}/api/search/`;
 
 function UploadPage() {
   // State variables to track form data and upload status
