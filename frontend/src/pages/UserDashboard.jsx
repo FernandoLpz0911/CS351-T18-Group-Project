@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import './UserDashboard.css'; // Create a simple CSS file for this
+import './UserDashboard.css';
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 
 function UserDashboard() {
   const [myBlocks, setMyBlocks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [copiedId, setCopiedId] = useState(null); // Track which row was just copied
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +20,6 @@ function UserDashboard() {
       }
 
       try {
-        // Fetch from our new custom "mine" endpoint
         const response = await axios.get(`${BASE_URL}/api/blocks/mine/`, {
           headers: { 'Authorization': `Token ${token}` }
         });
@@ -34,46 +34,93 @@ function UserDashboard() {
     fetchMyBlocks();
   }, [navigate]);
 
+  // Function to handle copying the hash
+  const handleCopy = (hash, id) => {
+    if (hash) {
+      navigator.clipboard.writeText(hash);
+      setCopiedId(id); // Set the ID of the item that was copied
+      
+      // Reset the "Copied!" message after 2 seconds
+      setTimeout(() => setCopiedId(null), 2000);
+    }
+  };
+
   return (
     <div className="page-container">
       <div className="screen-box dashboard-box">
-        <h2 className="screen-title">My Image Registry</h2>
-        <Link to="/upload" className="nav-link" style={{marginBottom: '20px', display:'block'}}>+ Register New Image</Link>
         
-        {loading ? <p>Loading your registry...</p> : (
-          <div className="registry-list">
+        <div className="dashboard-header">
+          <h2 className="screen-title">My Registry</h2>
+          <Link to="/upload" className="primary-action-btn">
+            + Register New Image
+          </Link>
+        </div>
+        
+        {loading ? (
+          <div className="loading-state">Loading your secure registry...</div>
+        ) : (
+          <div className="registry-container">
             {myBlocks.length === 0 ? (
-              <p>You haven't registered any images yet.</p>
+              <div className="empty-state">
+                <p>You haven't registered any intellectual property yet.</p>
+                <Link to="/upload" className="nav-link">Start Registration</Link>
+              </div>
             ) : (
               <table className="registry-table">
                 <thead>
                   <tr>
-                    <th>Image</th>
-                    <th>Hash Key (ID)</th>
-                    <th>AI Consent</th>
-                    <th>Registered Date</th>
+                    <th className="th-image">Artwork</th>
+                    <th className="th-hash">Cryptographic Hash Key</th>
+                    <th className="th-consent">AI Usage</th>
+                    <th className="th-date">Date Registered</th>
                   </tr>
                 </thead>
                 <tbody>
                   {myBlocks.map((block) => (
-                    <tr key={block.id}>
-                      <td>
-                        <img 
-                          src={block.registered_image} 
-                          alt="Thumbnail" 
-                          style={{width: '50px', height: '50px', objectFit: 'cover', borderRadius: '4px'}}
-                        />
+                    <tr key={block.id} className="registry-row">
+                      {/* Image Thumbnail */}
+                      <td className="td-image">
+                        <a href={block.registered_image} target="_blank" rel="noopener noreferrer">
+                            <img 
+                              src={block.registered_image} 
+                              alt="Thumbnail" 
+                              className="table-thumb"
+                            />
+                        </a>
                       </td>
-                      <td className="hash-cell" title={block.image_hash}>
-                        {block.image_hash.substring(0, 10)}...
+
+                      {/* Hash Key with Copy Button */}
+                      <td className="td-hash">
+                        <div className="hash-wrapper">
+                          <code className="hash-code" title={block.image_hash}>
+                            {block.image_hash ? `${block.image_hash.substring(0, 16)}...` : 'Generating...'}
+                          </code>
+                          <button 
+                            className={`copy-icon-btn ${copiedId === block.id ? 'copied' : ''}`}
+                            onClick={() => handleCopy(block.image_hash, block.id)}
+                            title="Copy full hash key"
+                          >
+                            {copiedId === block.id ? '✓ Copied' : 'Copy'}
+                          </button>
+                        </div>
                       </td>
+
+                      {/* Consent Badge */}
                       <td>
                         {block.ai_consent ? 
-                          <span className="badge-green">Allowed</span> : 
-                          <span className="badge-red">Denied</span>
+                          <span className="badge badge-success">Allowed</span> : 
+                          <span className="badge badge-danger">Denied</span>
                         }
                       </td>
-                      <td>{new Date(block.timestamp).toLocaleDateString()}</td>
+
+                      {/* Date */}
+                      <td className="td-date">
+                        {new Date(block.timestamp).toLocaleDateString(undefined, {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
