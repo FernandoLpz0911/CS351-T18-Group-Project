@@ -5,6 +5,7 @@
 # python manage.py migrate
 
 from django.db import models
+from django.contrib.auth.models import User
 
 class Block(models.Model):
     # items to put inside merkle tree
@@ -24,6 +25,8 @@ class Block(models.Model):
 
     # basic timestamp for image
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
 def __str__(self):
         return f"height #{self.height}"

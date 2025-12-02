@@ -1,95 +1,92 @@
-// LoginPage.jsx - Login page for users to access their account
-// Has fields for email/username and password, plus link to sign up
-
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './LoginPage.css';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './SignUpPage.css'; // Reusing the same CSS
+
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 
 function LoginPage() {
-  // State variables for form inputs
-  const [email, setEmail] = useState('');  // Email/username input
-  const [password, setPassword] = useState('');  // Password input
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const navigate = useNavigate();
 
-  // Function called when user clicks "Login" button
-  // This is just a demo - you'll connect to backend later
-  const handleLogin = (e) => {
-    e.preventDefault();  // Prevent form from refreshing the page
-    console.log('Login attempt:', { email, password });
-    // TODO: Connect to backend authentication
-    alert('Login functionality coming soon!');
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+
+    try {
+      // Request token from Django
+      const response = await axios.post(`${BASE_URL}/api/login/`, {
+        username: username,
+        password: password
+      });
+
+      // Save token to LocalStorage
+      localStorage.setItem('authToken', response.data.token);
+      localStorage.setItem('username', response.data.username);
+      
+      console.log('Login successful');
+      
+      // Force a hard reload so the App/Navbar can update state (if you implemented that)
+      // Otherwise, standard navigation is fine: navigate('/');
+      window.location.href = '/'; 
+
+    } catch (err) {
+      console.error('Login failed:', err);
+      setError('Invalid credentials. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="page-container">
-      <div className="screen-box login-box">
-        <h2 className="screen-title">Login to ArtGuard</h2>
+      <div className="screen-box" style={{ maxWidth: '400px' }}>
+        <h2 className="screen-title">Log In</h2>
         
         <div className="content">
-          {/* Welcome message */}
-          <p className="descriptive-text">
-            Sign in to manage your registered artwork
-          </p>
-          
-          {/* ========== LOGIN FORM ========== */}
-          <form onSubmit={handleLogin} className="login-form">
-            
-            {/* Email/Username field */}
-            <div className="form-group">
-              <label className="field-label" htmlFor="email">
-                Email or Username
-              </label>
+          {error && <div style={{ color: 'red', textAlign: 'center', marginBottom: '1rem' }}>{error}</div>}
+
+          <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div>
+              <label className="field-label">Username:</label>
               <input
-                id="email"
                 type="text"
                 className="text-input"
-                placeholder="Enter your email or username"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </div>
-            
-            {/* Password field */}
-            <div className="form-group">
-              <label className="field-label" htmlFor="password">
-                Password
-              </label>
+
+            <div>
+              <label className="field-label">Password:</label>
               <input
-                id="password"
                 type="password"
                 className="text-input"
-                placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
-            
-            {/* Forgot password link */}
-            <div className="forgot-password">
-              <Link to="/forgot-password" className="link-text">
-                Forgot password?
-              </Link>
-            </div>
-            
-            {/* Login button */}
-            <button type="submit" className="action-button login-button">
-              Login
+
+            <button 
+              type="submit" 
+              className="action-button" 
+              disabled={isLoading}
+              style={{ marginTop: '1rem' }}
+            >
+              {isLoading ? 'Logging In...' : 'Log In'}
             </button>
           </form>
-          
-          {/* ========== DIVIDER ========== */}
-          <div className="divider-with-text">
-            <span>or</span>
-          </div>
-          
-          {/* ========== CREATE ACCOUNT SECTION ========== */}
-          <div className="signup-section">
-            <p className="signup-text">Don't have an account?</p>
-            <Link to="/signup" className="action-button secondary-button">
-              Create Account
-            </Link>
-          </div>
+
+          <p style={{ textAlign: 'center', marginTop: '1rem' }}>
+            Don't have an account? <Link to="/signup" className="nav-link">Sign Up</Link>
+          </p>
         </div>
       </div>
     </div>

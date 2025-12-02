@@ -1,16 +1,30 @@
 # api/serializers.py
 from rest_framework import serializers
 from django.db.models import Max
+from django.contrib.auth.models import User
 
 from .models import Block
 from .merkleTree import merkle_root, hash_data 
 from .skipList import update_skip_list 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
+
 class BlockSerializer(serializers.ModelSerializer):
+
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Block
         fields = '__all__'
-        read_only_fields = ['merkle_root', 'height', 'image_hash'] # No touch
+        read_only_fields = ['merkle_root', 'height', 'image_hash', 'owner'] # No touch
 
     def create(self, validated_data):
         

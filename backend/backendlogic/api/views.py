@@ -12,9 +12,46 @@ from .merkleTree import hash_data
 from rest_framework.parsers import JSONParser, MultiPartParser
 from django.db import IntegrityError
 
+# imports for user authentication using tokens
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
+from .serializers import UserSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
+class RegisterUserView(APIView):
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({
+                'token': token.key,
+                'user_id': user.pk,
+                'email': user.email
+            }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class CustomAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'username': user.username
+        })
+
 class BlockViewSet(viewsets.ModelViewSet):
     queryset = Block.objects.all().order_by('-height') 
     serializer_class = BlockSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+
+        # Auto set owner to current signed in user
+        serializer.save(owner=self.request.user)
 
     def create(self, request, *args, **kwargs):
         try:
