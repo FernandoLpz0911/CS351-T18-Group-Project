@@ -8,6 +8,7 @@ import './UploadPage.css';
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 const SEARCH_API_URL = `${BASE_URL}/api/search/`;
+const UPLOAD_API_URL = `${BASE_URL}/api/blocks/`;
 
 function UploadPage() {
   // State variables to track form data and upload status
