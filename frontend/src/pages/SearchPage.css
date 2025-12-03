@@ -26,7 +26,7 @@
 }
 
 .certificate-box {
-  max-width: 900px;
+  max-width: 1000px;
   width: 100%;
   border-top: 5px solid #2e7d32;
   animation: slideDown 0.5s ease-out;
@@ -68,7 +68,7 @@
 
 .evidence-image-container {
   flex: 1;
-  min-width: 300px;
+  min-width: 250px;
   background-color: #f9f9f9;
   padding: 15px;
   border-radius: 8px;
@@ -82,8 +82,9 @@
 
 .evidence-image {
   max-width: 100%;
-  max-height: 400px;
+  max-height: 300px;
   width: auto;
+  height: auto;
   border-radius: 4px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   object-fit: contain;
@@ -193,24 +194,6 @@
   text-align: center;
 }
 
-@media (max-width: 768px) {
-  .certificate-content {
-    flex-direction: column;
-  }
-  
-  .evidence-image-container, .evidence-details {
-    width: 100%;
-  }
-  
-  .search-bar {
-    flex-direction: column;
-  }
-  
-  .action-button {
-    width: 100%;
-  }
-}
-
 .distance-legend {
   background-color: #f8f9fa;
   border: 1px solid #e9ecef;
@@ -266,4 +249,71 @@
 .legend-item .desc {
   font-size: 0.85rem;
   color: #666;
+}
+
+.comparison-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+.comparison-container .evidence-image-container {
+  flex: 1;
+  width: 45%;
+}
+
+.match-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #d32f2f;
+  font-weight: bold;
+  animation: pulse 1.5s infinite;
+  min-width: 80px; 
+}
+
+.match-indicator .arrow {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.image-label {
+  background: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .certificate-content,
+  .comparison-container {
+    flex-direction: column;
+  }
+  
+  .evidence-image-container, .evidence-details {
+    width: 100%;
+  }
+  
+  .match-indicator .arrow {
+    transform: rotate(90deg);
+    margin: 10px 0;
+  }
+  
+  .comparison-container .evidence-image-container {
+    width: 100%;
+  }
 }

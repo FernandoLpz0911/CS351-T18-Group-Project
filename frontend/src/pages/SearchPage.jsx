@@ -8,7 +8,6 @@ const FILE_SEARCH_URL = `${BASE_URL}/api/search/file-compare/`;
 
 const DistanceLegend = ({ matchType }) => {
   if (!matchType || !matchType.includes("Distance")) return null;
-
   const distanceMatch = matchType.match(/Distance: (\d+)/);
   const score = distanceMatch ? parseInt(distanceMatch[1]) : 0;
 
@@ -17,20 +16,16 @@ const DistanceLegend = ({ matchType }) => {
       <h4>Understanding the Match Score: <span className="score-highlight">{score}</span></h4>
       <div className="legend-grid">
         <div className={`legend-item ${score === 0 ? 'active' : ''}`}>
-          <span className="range">0</span>
-          <span className="desc">Exact Match</span>
+          <span className="range">0</span><span className="desc">Exact Match</span>
         </div>
         <div className={`legend-item ${score > 0 && score <= 10 ? 'active' : ''}`}>
-          <span className="range">1 - 10</span>
-          <span className="desc">Tiny Changes (Compression, Format)</span>
+          <span className="range">1 - 10</span><span className="desc">Tiny Changes</span>
         </div>
         <div className={`legend-item ${score > 10 && score <= 20 ? 'active' : ''}`}>
-          <span className="range">11 - 20</span>
-          <span className="desc">Visible Edits (Dots, Lines, Cropping)</span>
+          <span className="range">11 - 20</span><span className="desc">Visible Edits</span>
         </div>
         <div className={`legend-item ${score > 20 ? 'active' : ''}`}>
-          <span className="range">20+</span>
-          <span className="desc">Significant Modification</span>
+          <span className="range">20+</span><span className="desc">Significant</span>
         </div>
       </div>
     </div>
@@ -40,11 +35,22 @@ const DistanceLegend = ({ matchType }) => {
 function SearchPage() {
   const [searchHash, setSearchHash] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
   const [activeTab, setActiveTab] = useState('hash'); 
   
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        setSelectedFile(file);
+        setPreviewUrl(URL.createObjectURL(file));
+        setError(null);
+        setResult(null);
+    }
+  };
 
   const handleHashSearch = async () => {
     if (!searchHash.trim()) return;
@@ -111,22 +117,51 @@ function SearchPage() {
             <span className="timestamp">Registered: {new Date(result.timestamp || result.date_uploaded).toLocaleString()}</span>
           </div>
 
-          <div className="certificate-content">
-            <div className="evidence-image-container">
-              {result.image_url || result.registered_image ? (
-                <img 
-                  src={getFullImageUrl(result.image_url || result.registered_image)} 
-                  alt="Registered Work" 
-                  className="evidence-image" 
-                  onError={(e) => {e.target.onerror = null; e.target.src = "https://placehold.co/400x300?text=Image+Not+Found"}}
-                />
-              ) : (
-                <div className="no-image-placeholder">No Image Available</div>
-              )}
-              <p className="caption">Visual Evidence</p>
-            </div>
+          <DistanceLegend matchType={result.match_type} />
 
-            <div className="evidence-details">
+          <div className="certificate-content">
+            
+            {activeTab === 'file' && previewUrl ? (
+                <div className="comparison-container">
+                    <div className="evidence-image-container">
+                        <div className="image-label">Your Upload (Suspicious)</div>
+                        <img 
+                            src={previewUrl} 
+                            alt="Scanned Work" 
+                            className="evidence-image" 
+                        />
+                    </div>
+                    <div className="match-indicator">
+                        <span>⚡ MATCHED ⚡</span>
+                        <div className="arrow">➜</div>
+                    </div>
+                    <div className="evidence-image-container">
+                        <div className="image-label">Registered Original</div>
+                        {result.image_url || result.registered_image ? (
+                            <img 
+                            src={getFullImageUrl(result.image_url || result.registered_image)} 
+                            alt="Registered Work" 
+                            className="evidence-image" 
+                            onError={(e) => {e.target.onerror = null; e.target.src = "https://placehold.co/400x300?text=Image+Not+Found"}}
+                            />
+                        ) : (
+                            <div className="no-image-placeholder">No Image Available</div>
+                        )}
+                    </div>
+                </div>
+            ) : (
+                <div className="evidence-image-container" style={{maxWidth: '100%'}}>
+                    <div className="image-label">Registered Original</div>
+                    <img 
+                        src={getFullImageUrl(result.image_url || result.registered_image)} 
+                        alt="Registered Work" 
+                        className="evidence-image" 
+                    />
+                </div>
+            )}
+
+            <div className="evidence-details" style={{width: '100%', marginTop: '20px'}}>
+              <hr />
               <div className="detail-row">
                 <label>Rights Holder:</label>
                 <div className="verified-name">
@@ -155,7 +190,6 @@ function SearchPage() {
               </div>
             </div>
           </div>
-           <DistanceLegend matchType={result.match_type} />
         </div>
       )}
 
@@ -192,7 +226,6 @@ function SearchPage() {
         </div>
 
         <div className="search-bar" style={{flexDirection: 'column'}}>
-          
           {activeTab === 'hash' ? (
             <div style={{display: 'flex', gap: '10px'}}>
                 <input
@@ -212,7 +245,7 @@ function SearchPage() {
                 <input 
                     type="file" 
                     accept="image/*"
-                    onChange={(e) => setSelectedFile(e.target.files[0])}
+                    onChange={handleFileSelect}
                 />
                 <button 
                     className="action-button" 
@@ -224,7 +257,6 @@ function SearchPage() {
                 </button>
             </div>
           )}
-
         </div>
 
         {error && <div className="error-message">⚠️ {error}</div>}

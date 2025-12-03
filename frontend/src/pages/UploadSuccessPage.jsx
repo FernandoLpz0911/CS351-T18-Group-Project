@@ -7,9 +7,7 @@ function UploadSuccessPage() {
   const [copyStatus, setCopyStatus] = useState('');
   const blockData = location.state?.blockData;
     
-  const blockHeight = blockData?.height || 'N/A';
   const imageHash = blockData?.image_hash || 'N/A';
-  const merkleRoot = blockData?.merkle_root || 'N/A';
   const imageUrl = blockData?.registered_image;
     
   const handleDownload = () => {
@@ -40,12 +38,12 @@ function UploadSuccessPage() {
           <div className="status-box">
             <p className="status-text">✅ Upload Successful</p>
           </div>
-                
+          
           <div className="info-details">
-            <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '15px' }}>
               <strong>Image Hash (Key):</strong>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <span title={imageHash} style={{ marginRight: '10px', wordBreak: 'break-all' }}>
+                <span title={imageHash} style={{ marginRight: '10px', wordBreak: 'break-all', fontFamily: 'monospace' }}>
                   {imageHash.substring(0, 10)}...
                 </span>
                 
@@ -61,7 +59,7 @@ function UploadSuccessPage() {
                   {copyStatus || 'Copy'}
                 </button>
               </div>
-            </p>
+            </div>
           </div>
                 
           <button 
