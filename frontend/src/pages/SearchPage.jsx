@@ -40,45 +40,28 @@ function SearchPage() {
   };
 
   return (
-    <div className="page-container">
-      <div className="screen-box search-box">
-        <h2 className="screen-title">Registry Lookup</h2>
-        <p className="descriptive-text">
-          Enter a cryptographic hash key to retrieve the official registration record and usage rights.
-        </p>
-        
-        <div className="search-bar">
-          <input
-            type="text"
-            className="text-input search-input"
-            placeholder="e.g. 8f434346648f6b96df89dda901c5176b..."
-            value={searchHash}
-            onChange={(e) => setSearchHash(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-          />
-          <button className="action-button" onClick={handleSearch} disabled={loading}>
-            {loading ? 'Verifying...' : 'Verify'}
-          </button>
-        </div>
-
-        {error && <div className="error-message">⚠️ {error}</div>}
-      </div>
-
+    <div className="page-container search-layout">
+      
       {result && (
         <div className="screen-box certificate-box">
           <div className="certificate-header">
             <h3>✅ Official Registration Record</h3>
-            <span className="timestamp">Registered: {new Date(result.timestamp).toLocaleString()}</span>
+            <span className="timestamp">Registered: {new Date(result.timestamp || result.date_uploaded).toLocaleString()}</span>
           </div>
 
           <div className="certificate-content">
             
             <div className="evidence-image-container">
-              <img 
-                src={getFullImageUrl(result.registered_image)} 
-                alt="Registered Work" 
-                className="evidence-image" 
-              />
+              {result.image_url || result.registered_image ? (
+                <img 
+                  src={getFullImageUrl(result.image_url || result.registered_image)} 
+                  alt="Registered Work" 
+                  className="evidence-image" 
+                  onError={(e) => {e.target.onerror = null; e.target.src = "https://placehold.co/400x300?text=Image+Not+Found"}}
+                />
+              ) : (
+                <div className="no-image-placeholder">No Image Available</div>
+              )}
               <p className="caption">Visual Evidence</p>
             </div>
 
@@ -87,13 +70,13 @@ function SearchPage() {
               <div className="detail-row">
                 <label>Rights Holder:</label>
                 <div className="verified-name">
-                  <span>🛡️</span> {result.legal_name || result.owner || "Unknown"}
+                 {result.legal_name || result.author || "Unknown"}
                 </div>
               </div>
 
               <div className="detail-row">
                 <label>Cryptographic Hash:</label>
-                <code className="hash-display">{result.image_hash}</code>
+                <code className="hash-display">{result.image_hash || result.hash_key}</code>
               </div>
 
               <div className="detail-row">
@@ -119,6 +102,30 @@ function SearchPage() {
           </div>
         </div>
       )}
+
+      <div className="screen-box search-box">
+        <h2 className="screen-title">Registry Lookup</h2>
+        <p className="descriptive-text">
+          Enter a cryptographic hash key to retrieve the official registration record and usage rights.
+        </p>
+        
+        <div className="search-bar">
+          <input
+            type="text"
+            className="text-input search-input"
+            placeholder="e.g. 5dce308c3d2f9..."
+            value={searchHash}
+            onChange={(e) => setSearchHash(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+          />
+          <button className="action-button" onClick={handleSearch} disabled={loading}>
+            {loading ? 'Verifying...' : 'Verify'}
+          </button>
+        </div>
+
+        {error && <div className="error-message">⚠️ {error}</div>}
+      </div>
+
     </div>
   );
 }

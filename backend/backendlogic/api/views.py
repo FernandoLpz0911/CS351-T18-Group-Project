@@ -100,11 +100,13 @@ class IDLookupView(APIView):
             serializer = BlockSerializer(block_data)
             
             response_data = {
-                 'author': block_data.items[0].split(':')[-1].strip(),
-                 'date_uploaded': block_data.timestamp.strftime('%Y-%m-%d %H:%M'),
-                 'image_url': block_data.registered_image.url if block_data.registered_image else None,
-                 'block_hash': serializer.data['merkle_root'], 
-                 'hash_key': block_data.image_hash 
+                'author': block_data.owner.username if block_data.owner else "Unknown",
+                'legal_name': block_data.legal_name,  # Add this
+                'ai_consent': block_data.ai_consent,  # Add this
+                'date_uploaded': block_data.timestamp.strftime('%Y-%m-%d %H:%M'),
+                'image_url': block_data.registered_image.url if block_data.registered_image else None,
+                'block_hash': serializer.data['merkle_root'], 
+                'hash_key': block_data.image_hash 
             }
             return Response(response_data, status=status.HTTP_200_OK)
 
