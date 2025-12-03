@@ -3,11 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUpPage.css';
 
-// Use environment variable for URL
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 
 function SignUpPage() {
-  // New state for names
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   
@@ -33,19 +31,17 @@ function SignUpPage() {
     }
 
     try {
-      // Send all registration data including legal name
       const response = await axios.post(`${BASE_URL}/api/register/`, {
         username: username,
         email: email,
         password: password,
-        first_name: firstName, // Sent to backend
-        last_name: lastName    // Sent to backend
+        first_name: firstName, 
+        last_name: lastName    
       });
 
-      // Automatically log the user in by saving their new token
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem('username', username);
-      localStorage.setItem('fullName', response.data.full_name); // Save the verified name!
+      localStorage.setItem('fullName', response.data.full_name); 
       
       console.log('Registration successful:', response.data);
       alert('Account created successfully!');
@@ -71,7 +67,6 @@ function SignUpPage() {
 
           <form onSubmit={handleSignUp} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             
-            {/* NEW: Legal Name Section */}
             <div style={{display: 'flex', gap: '1rem'}}>
                 <div style={{flex: 1}}>
                     <label className="field-label">First Name (Legal):</label>

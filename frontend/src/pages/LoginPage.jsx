@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './SignUpPage.css'; // Reusing existing styles
+import './SignUpPage.css';
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 
@@ -24,14 +24,11 @@ function LoginPage() {
         password: password
       });
 
-      // Save token AND the full name
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem('username', response.data.username);
-      localStorage.setItem('fullName', response.data.full_name); // <--- Critical Update
+      localStorage.setItem('fullName', response.data.full_name);
       
       console.log('Login successful');
-      
-      // Force reload to update navigation state
       window.location.href = '/'; 
 
     } catch (err) {

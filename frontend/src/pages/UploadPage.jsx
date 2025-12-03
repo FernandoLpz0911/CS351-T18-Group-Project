@@ -10,7 +10,6 @@ function UploadPage() {
   const [imagePreview, setImagePreview] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   
-  // State for the legal name (now read-only) and AI consent
   const [legalName, setLegalName] = useState('');
   const [aiConsent, setAiConsent] = useState(false);
 
@@ -19,7 +18,6 @@ function UploadPage() {
   
   const navigate = useNavigate();
 
-  // Check login and get the user's verified name
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     const savedName = localStorage.getItem('fullName');
@@ -28,7 +26,7 @@ function UploadPage() {
         alert("Please log in to upload artwork.");
         navigate('/login');
     } else if (savedName) {
-        setLegalName(savedName); // Auto-fill the Verified Identity
+        setLegalName(savedName);
     } else {
         setLegalName("Unknown User");
     }
@@ -64,10 +62,8 @@ function UploadPage() {
 
     const formData = new FormData();
     formData.append('registered_image', selectedFile);
-    formData.append('ai_consent', aiConsent); // Send the boolean
+    formData.append('ai_consent', aiConsent);
     
-    // We add the legal name to the cryptographic hash items, but we don't
-    // need to send it as a separate field because the backend knows who we are.
     const items = [
         `LEGAL_OWNER:${legalName}`,
         `FILENAME:${selectedFile.name}`,
@@ -85,7 +81,6 @@ function UploadPage() {
       });
       
       console.log('Block created successfully:', response.data);
-      // Navigate to the dashboard or success page
       navigate('/success', { state: { blockData: response.data } });
 
     } catch (error) {
@@ -139,7 +134,6 @@ function UploadPage() {
           
           <hr className="divider" />
           
-          {/* --- NEW: Verified Identity Box --- */}
           <div className="form-group">
             <label className="field-label">Identity Verified:</label>
             <div style={{
@@ -162,7 +156,6 @@ function UploadPage() {
             </p>
           </div>
 
-          {/* --- NEW: AI Consent Checkbox --- */}
           <div className="form-group" style={{marginTop: '15px'}}>
             <label className="field-label" style={{display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer'}}>
               <input 

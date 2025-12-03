@@ -33,12 +33,9 @@ function SearchPage() {
     }
   };
 
-  // --- HELPER FUNCTION TO FIX BROKEN IMAGE LINKS ---
   const getFullImageUrl = (imagePath) => {
     if (!imagePath) return null;
-    // If it already starts with http, it's fine. 
     if (imagePath.startsWith('http')) return imagePath;
-    // Otherwise, prepend the Backend URL to make it a full link
     return `${BASE_URL}${imagePath}`;
   };
 
@@ -67,7 +64,6 @@ function SearchPage() {
         {error && <div className="error-message">⚠️ {error}</div>}
       </div>
 
-      {/* --- EVIDENCE / CERTIFICATE DISPLAY --- */}
       {result && (
         <div className="screen-box certificate-box">
           <div className="certificate-header">
@@ -77,9 +73,7 @@ function SearchPage() {
 
           <div className="certificate-content">
             
-            {/* Visual Evidence */}
             <div className="evidence-image-container">
-              {/* WE USE THE HELPER FUNCTION HERE */}
               <img 
                 src={getFullImageUrl(result.registered_image)} 
                 alt="Registered Work" 
@@ -88,7 +82,6 @@ function SearchPage() {
               <p className="caption">Visual Evidence</p>
             </div>
 
-            {/* Legal Details */}
             <div className="evidence-details">
               
               <div className="detail-row">

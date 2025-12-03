@@ -8,7 +8,7 @@ const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 function UserDashboard() {
   const [myBlocks, setMyBlocks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [copiedId, setCopiedId] = useState(null); // Track which row was just copied
+  const [copiedId, setCopiedId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,13 +34,10 @@ function UserDashboard() {
     fetchMyBlocks();
   }, [navigate]);
 
-  // Function to handle copying the hash
   const handleCopy = (hash, id) => {
     if (hash) {
       navigator.clipboard.writeText(hash);
-      setCopiedId(id); // Set the ID of the item that was copied
-      
-      // Reset the "Copied!" message after 2 seconds
+      setCopiedId(id);
       setTimeout(() => setCopiedId(null), 2000);
     }
   };
@@ -78,7 +75,6 @@ function UserDashboard() {
                 <tbody>
                   {myBlocks.map((block) => (
                     <tr key={block.id} className="registry-row">
-                      {/* Image Thumbnail */}
                       <td className="td-image">
                         <a href={block.registered_image} target="_blank" rel="noopener noreferrer">
                             <img 
@@ -89,7 +85,6 @@ function UserDashboard() {
                         </a>
                       </td>
 
-                      {/* Hash Key with Copy Button */}
                       <td className="td-hash">
                         <div className="hash-wrapper">
                           <code className="hash-code" title={block.image_hash}>
@@ -105,7 +100,6 @@ function UserDashboard() {
                         </div>
                       </td>
 
-                      {/* Consent Badge */}
                       <td>
                         {block.ai_consent ? 
                           <span className="badge badge-success">Allowed</span> : 
@@ -113,7 +107,6 @@ function UserDashboard() {
                         }
                       </td>
 
-                      {/* Date */}
                       <td className="td-date">
                         {new Date(block.timestamp).toLocaleDateString(undefined, {
                           year: 'numeric',
