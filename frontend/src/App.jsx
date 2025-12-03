@@ -2,7 +2,7 @@
 // This is the top-level component that wraps everything in your app
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
@@ -16,6 +16,15 @@ import UserDashboard from './pages/UserDashboard';
 function App() {
   // State to track if the sidebar menu is open or closed
   const [menuOpen, setMenuOpen] = useState(false);
+  
+  // State to track authentication status
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check for token when the app loads to update the menu UI
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    setIsLoggedIn(!!token); // !! converts string to boolean (true if token exists)
+  }, []);
 
   // Function to toggle the menu open/closed
   const toggleMenu = () => {
@@ -25,6 +34,23 @@ function App() {
   // Function to close the menu
   const closeMenu = () => {
     setMenuOpen(false);
+  };
+
+  // Handle Logout Logic
+  const handleLogout = (e) => {
+    e.preventDefault(); // Prevent default anchor link behavior
+    
+    // 1. Clear user data from local storage
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('username');
+    localStorage.removeItem('fullName');
+    
+    // 2. Update state
+    setIsLoggedIn(false);
+    setMenuOpen(false);
+
+    // 3. Redirect to home page (using window.location to ensure full state reset)
+    window.location.href = '/';
   };
 
   return (
@@ -57,22 +83,35 @@ function App() {
               <span className="menu-icon-text">🏠</span>
               Home
             </Link>
+            
+            {/* You can optionally hide Dashboard if not logged in, but keeping it visible is fine too */}
             <Link to="/dashboard" onClick={closeMenu}>
-              <span className='menu-icon-text'>📁</span>
+              <span className='menu-icon-text'>📂</span>
               Dashboard
             </Link>
+            
             <Link to="/search" onClick={closeMenu}>
               <span className="menu-icon-text">🔍</span>
               Search Registry
             </Link>
+            
             <Link to="/upload" onClick={closeMenu}>
               <span className="menu-icon-text">📝</span>
               Register Artwork
             </Link>
-            <Link to="/login" onClick={closeMenu}>
-              <span className="menu-icon-text">🔐</span>
-              Login/Register
-            </Link>
+
+            {/* CONDITIONAL RENDERING: Swap Login with Sign Out */}
+            {isLoggedIn ? (
+              <a href="/" onClick={handleLogout} style={{ cursor: 'pointer' }}>
+                <span className="menu-icon-text">🚪</span>
+                Sign Out
+              </a>
+            ) : (
+              <Link to="/login" onClick={closeMenu}>
+                <span className="menu-icon-text">👤</span>
+                Login/Register
+              </Link>
+            )}
           </nav>
           
           {/* Footer section with branding and tagline */}

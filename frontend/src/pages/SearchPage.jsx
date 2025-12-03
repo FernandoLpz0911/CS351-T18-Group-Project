@@ -1,126 +1,131 @@
-// SearchPage.jsx - Page where users can search for registered artwork
-// Users can search by entering a hash key/ID to find the owner
-
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SearchPage.css';
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
-const SEARCH_API_URL = `${BASE_URL}/api/search/`;
+const SEARCH_API_URL = `${BASE_URL}/api/search/id-lookup/`;
 
 function SearchPage() {
-  // State variables to track user input and search status
-  const [inputHash, setInputHash] = useState('');  // The hash/ID entered by user
-  const [selectedFile, setSelectedFile] = useState(null);  // File uploaded by user (not used yet)
-  const [isSearching, setIsSearching] = useState(false);  // True when search is in progress
-  const [searchError, setSearchError] = useState(null);  // Error message if search fails
-  const navigate = useNavigate();  // Function to navigate to other pages
+  const [searchHash, setSearchHash] = useState('');
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // Function called when user selects a file (not fully implemented)
-  const handleFileSelect = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setSelectedFile(file);
-      setSearchError(null);  // Clear any previous errors
+  const handleSearch = async () => {
+    if (!searchHash.trim()) return;
+
+    setLoading(true);
+    setError(null);
+    setResult(null);
+
+    try {
+      const response = await axios.post(SEARCH_API_URL, { query_hash: searchHash.trim() });
+      setResult(response.data);
+    } catch (err) {
+      console.error(err);
+      if (err.response?.status === 404) {
+        setError("No record found. This hash key is not in the registry.");
+      } else {
+        setError("Search failed. Please check the key.");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Function called when user clicks "Lookup Owner/Status" button
-  const handleSearch = async (searchType) => {
-    // Validation: Make sure user entered a hash
-    if (searchType === 'hash-lookup' && !inputHash.trim()) {
-      setSearchError('Please enter a File Hash or IP ID.');
-      return;
-    }
-    
-    // Validation: Make sure user selected a file (if doing file search)
-    if (searchType === 'file-compare' && !selectedFile) {
-      setSearchError('Please select an image file for comparison.');
-      return;
-    }
-
-    // Show loading state
-    setIsSearching(true);
-    setSearchError(null);
-
-    // Prepare data to send to backend
-    let endpoint = '';
-    let dataToSend = {};
-    let contentType = 'application/json';
-
-    if (searchType === 'hash-lookup') {
-      // Search by hash key
-      endpoint = `${SEARCH_API_URL}id-lookup/`;
-      dataToSend = { query_hash: inputHash.trim() };
-    } else {
-      // Search by uploading file
-      endpoint = `${SEARCH_API_URL}file-compare/`;
-      const formData = new FormData();
-      formData.append('image', selectedFile);
-      dataToSend = formData;
-      contentType = 'multipart/form-data';
-    }
-
-    // Make API request to backend
-    try {
-      const response = await axios.post(endpoint, dataToSend, {
-        headers: { 'Content-Type': contentType },
-      });
-
-      // If successful, navigate to results page with the data
-      navigate('/result', { state: { result: response.data, searchType: searchType } });
-
-    } catch (error) {
-      // If error, show error message
-      console.error('Search failed:', error);
-      const errorMessage = error.response?.data?.error || 'Search failed due to a server error.';
-      setSearchError(errorMessage);
-      
-    } finally {
-      // Always turn off loading state when done
-      setIsSearching(false);
-    }
+  // --- HELPER FUNCTION TO FIX BROKEN IMAGE LINKS ---
+  const getFullImageUrl = (imagePath) => {
+    if (!imagePath) return null;
+    // If it already starts with http, it's fine. 
+    if (imagePath.startsWith('http')) return imagePath;
+    // Otherwise, prepend the Backend URL to make it a full link
+    return `${BASE_URL}${imagePath}`;
   };
 
   return (
     <div className="page-container">
-      <div className="screen-box">
-        <h2 className="screen-title">Search Registered Works</h2>
+      <div className="screen-box search-box">
+        <h2 className="screen-title">Registry Lookup</h2>
+        <p className="descriptive-text">
+          Enter a cryptographic hash key to retrieve the official registration record and usage rights.
+        </p>
         
-        <div className="content">
-          
-          {/* ========== SEARCH BY HASH SECTION ========== */}
-          <h3 className="section-title">Search by File Hash or IP ID</h3>
-          
-          {/* Input field for hash/ID */}
-          <label className="field-label" htmlFor="hash-input">File Hash / IP ID:</label>
+        <div className="search-bar">
           <input
-            id="hash-input"
             type="text"
-            className="text-input"
-            placeholder="Enter unique registered hash or ID"
-            value={inputHash}
-            onChange={(e) => setInputHash(e.target.value)}  // Update state as user types
-            disabled={isSearching}  // Disable while searching
+            className="text-input search-input"
+            placeholder="e.g. 8f434346648f6b96df89dda901c5176b..."
+            value={searchHash}
+            onChange={(e) => setSearchHash(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
           />
-          
-          {/* Search button */}
-          <button 
-            className="action-button primary-action" 
-            onClick={() => handleSearch('hash-lookup')}
-            disabled={isSearching || !inputHash.trim()}  // Disable if searching or no input
-          >
-            {isSearching ? 'Looking Up...' : 'Lookup Owner/Status'}
+          <button className="action-button" onClick={handleSearch} disabled={loading}>
+            {loading ? 'Verifying...' : 'Verify'}
           </button>
-
-          {/* Divider line */}
-          <hr className="divider" />
-          
-          {/* Show error message if search failed */}
-          {searchError && <p style={{ color: 'red', marginTop: '20px' }}>{searchError}</p>}
         </div>
+
+        {error && <div className="error-message">⚠️ {error}</div>}
       </div>
+
+      {/* --- EVIDENCE / CERTIFICATE DISPLAY --- */}
+      {result && (
+        <div className="screen-box certificate-box">
+          <div className="certificate-header">
+            <h3>✅ Official Registration Record</h3>
+            <span className="timestamp">Registered: {new Date(result.timestamp).toLocaleString()}</span>
+          </div>
+
+          <div className="certificate-content">
+            
+            {/* Visual Evidence */}
+            <div className="evidence-image-container">
+              {/* WE USE THE HELPER FUNCTION HERE */}
+              <img 
+                src={getFullImageUrl(result.registered_image)} 
+                alt="Registered Work" 
+                className="evidence-image" 
+              />
+              <p className="caption">Visual Evidence</p>
+            </div>
+
+            {/* Legal Details */}
+            <div className="evidence-details">
+              
+              <div className="detail-row">
+                <label>Rights Holder:</label>
+                <div className="verified-name">
+                  <span>🛡️</span> {result.legal_name || result.owner || "Unknown"}
+                </div>
+              </div>
+
+              <div className="detail-row">
+                <label>Cryptographic Hash:</label>
+                <code className="hash-display">{result.image_hash}</code>
+              </div>
+
+              <div className="detail-row">
+                <label>AI Training Consent:</label>
+                {result.ai_consent ? (
+                  <div className="consent-badge allowed">
+                    ✅ AUTHORIZED
+                    <small>The rights holder HAS granted permission for AI training.</small>
+                  </div>
+                ) : (
+                  <div className="consent-badge denied">
+                    ⛔ PROHIBITED
+                    <small>The rights holder has STRICTLY FORBIDDEN AI training use.</small>
+                  </div>
+                )}
+              </div>
+
+            </div>
+          </div>
+          
+          <div className="certificate-footer">
+            <p>This record is immutable and cryptographically secured on the ArtGuard Registry.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
