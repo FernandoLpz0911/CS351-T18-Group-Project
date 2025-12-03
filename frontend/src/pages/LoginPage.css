@@ -1,35 +1,24 @@
-/* LoginPage.css - Styles for the login page */
-
-/* ========== LOGIN BOX ========== */
-/* Slightly narrower box for login form */
 .login-box {
-  max-width: 450px;  /* Narrower than default 600px */
+  max-width: 450px;
 }
 
-/* ========== LOGIN FORM ========== */
-/* Container for all form elements */
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;  /* Space between form fields */
+  gap: 1.5rem;
 }
 
-/* ========== FORM GROUPS ========== */
-/* Container for each label + input pair */
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;  /* Space between label and input */
+  gap: 0.5rem;
 }
 
-/* ========== FORGOT PASSWORD ========== */
-/* Container for "Forgot password?" link */
 .forgot-password {
   text-align: right;
-  margin-top: -0.5rem;  /* Move it closer to password field */
+  margin-top: -0.5rem;
 }
 
-/* The "Forgot password?" link */
 .link-text {
   color: #333;
   text-decoration: none;
@@ -42,15 +31,11 @@
   text-decoration: underline;
 }
 
-/* ========== LOGIN BUTTON ========== */
-/* Specific styling for login button */
 .login-button {
   margin-top: 0.5rem;
-  width: 100%;  /* Full width button */
+  width: 100%;
 }
 
-/* ========== DIVIDER WITH TEXT ========== */
-/* The "or" divider between login and sign up */
 .divider-with-text {
   display: flex;
   align-items: center;
@@ -58,15 +43,13 @@
   margin: 2rem 0;
 }
 
-/* The lines on either side of "or" */
 .divider-with-text::before,
 .divider-with-text::after {
   content: '';
-  flex: 1;  /* Take up equal space */
+  flex: 1;
   border-bottom: 2px solid #333;
 }
 
-/* Space around the "or" text */
 .divider-with-text span {
   padding: 0 1rem;
   color: #666;
@@ -74,8 +57,6 @@
   font-size: 1.1rem;
 }
 
-/* ========== SIGN UP SECTION ========== */
-/* Container for "Don't have an account?" and Create Account button */
 .signup-section {
   display: flex;
   flex-direction: column;
@@ -83,14 +64,11 @@
   gap: 1rem;
 }
 
-/* "Don't have an account?" text */
 .signup-text {
   color: #666;
   font-size: 1rem;
 }
 
-/* ========== SECONDARY BUTTON ========== */
-/* The "Create Account" button (white with border) */
 .secondary-button {
   padding: 1rem 2rem;
   background: white;
@@ -101,10 +79,10 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  text-decoration: none;  /* Remove link underline */
+  text-decoration: none;
   text-align: center;
   display: inline-block;
-  width: 100%;  /* Full width */
+  width: 100%;
 }
 
 .secondary-button:hover {
@@ -112,10 +90,8 @@
   transform: translateY(-2px);
 }
 
-/* ========== RESPONSIVE DESIGN ========== */
-/* Adjustments for mobile devices */
 @media (max-width: 768px) {
   .login-box {
-    max-width: 100%;  /* Full width on mobile */
+    max-width: 100%;
   }
 }

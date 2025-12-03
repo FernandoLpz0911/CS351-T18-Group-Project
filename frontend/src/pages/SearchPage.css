@@ -1,46 +1,269 @@
-/* SearchPage.css - Styles specific to the search page */
-
-/* ========== SECTION TITLE ========== */
-/* Title for "Search by File Hash or IP ID" */
-.section-title {
-  color: black;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+.search-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding-top: 2rem;
 }
 
-/* ========== TEXT INPUT FIELD ========== */
-/* Input box where user types the hash/ID */
-.text-input {
-  padding: 0.75rem;
-  border: 2px solid #333;
-  border-radius: 4px;
+.search-box {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  order: 2;
+}
+
+.search-bar {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.search-input {
+  flex: 1;
+  font-family: 'Courier New', monospace;
   font-size: 1rem;
+}
+
+.certificate-box {
+  max-width: 900px;
+  width: 100%;
+  border-top: 5px solid #2e7d32;
+  animation: slideDown 0.5s ease-out;
+  order: 1;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.certificate-header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.certificate-header h3 {
+  color: #2e7d32;
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.timestamp {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.certificate-content {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.evidence-image-container {
+  flex: 1;
+  min-width: 300px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.evidence-image {
+  max-width: 100%;
+  max-height: 400px;
+  width: auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  object-fit: contain;
+}
+
+.no-image-placeholder {
+  padding: 3rem;
+  color: #999;
+  font-style: italic;
+  border: 2px dashed #ddd;
+  border-radius: 4px;
   width: 100%;
 }
 
-/* When input is focused (clicked on) */
-.text-input:focus {
-  outline: none;  /* Remove default browser outline */
-  border-color: #555;  /* Slightly lighter border */
+.caption {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
 }
 
-/* When input is disabled */
-.text-input:disabled {
-  background: #f5f5f5;  /* Light gray background */
-  cursor: not-allowed;  /* Show "not allowed" cursor */
+.evidence-details {
+  flex: 1.5;
+  min-width: 300px;
 }
 
-/* ========== DIVIDER LINE ========== */
-/* Horizontal line to separate sections */
-.divider {
-  border: none;
-  border-top: 2px solid #333;
-  margin: 2rem 0;
+.detail-row {
+  margin-bottom: 1.5rem;
 }
 
-/* ========== PRIMARY ACTION BUTTON ========== */
-/* Extra styling for the "Lookup Owner/Status" button */
-.primary-action {
-  margin-top: 0.5rem;
+.detail-row label {
+  display: block;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.verified-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hash-display {
+  background: #f4f4f4;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  word-break: break-all;
+  display: block;
+  border: 1px solid #ddd;
+  color: #444;
+  font-size: 0.9rem;
+}
+
+.consent-badge {
+  padding: 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.consent-badge small {
+  font-weight: normal;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.consent-badge.allowed {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.consent-badge.denied {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.certificate-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  text-align: center;
+  color: #888;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.error-message {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .certificate-content {
+    flex-direction: column;
+  }
+  
+  .evidence-image-container, .evidence-details {
+    width: 100%;
+  }
+  
+  .search-bar {
+    flex-direction: column;
+  }
+  
+  .action-button {
+    width: 100%;
+  }
+}
+
+.distance-legend {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.distance-legend h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #495057;
+  font-size: 1rem;
+}
+
+.score-highlight {
+  color: #d32f2f;
+  font-size: 1.2rem;
+  background: #ffebee;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.legend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.legend-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+  background: white;
+  opacity: 0.6;
+}
+
+.legend-item.active {
+  opacity: 1;
+  border: 2px solid #333;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.legend-item .range {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.legend-item .desc {
+  font-size: 0.85rem;
+  color: #666;
 }

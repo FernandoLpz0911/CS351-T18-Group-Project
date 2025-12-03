@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'backendlogic',
     'api',
@@ -140,3 +141,13 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",             
     "https://ai-watermark-registry.vercel.app"
 ]
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://ai-watermark-registry.*\.vercel\.app$",
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}

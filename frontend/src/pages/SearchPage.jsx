@@ -1,126 +1,235 @@
-// SearchPage.jsx - Page where users can search for registered artwork
-// Users can search by entering a hash key/ID to find the owner
-
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SearchPage.css';
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
-const SEARCH_API_URL = `${BASE_URL}/api/search/`;
+const ID_SEARCH_URL = `${BASE_URL}/api/search/id-lookup/`;
+const FILE_SEARCH_URL = `${BASE_URL}/api/search/file-compare/`;
+
+const DistanceLegend = ({ matchType }) => {
+  if (!matchType || !matchType.includes("Distance")) return null;
+
+  const distanceMatch = matchType.match(/Distance: (\d+)/);
+  const score = distanceMatch ? parseInt(distanceMatch[1]) : 0;
+
+  return (
+    <div className="distance-legend">
+      <h4>Understanding the Match Score: <span className="score-highlight">{score}</span></h4>
+      <div className="legend-grid">
+        <div className={`legend-item ${score === 0 ? 'active' : ''}`}>
+          <span className="range">0</span>
+          <span className="desc">Exact Match</span>
+        </div>
+        <div className={`legend-item ${score > 0 && score <= 10 ? 'active' : ''}`}>
+          <span className="range">1 - 10</span>
+          <span className="desc">Tiny Changes (Compression, Format)</span>
+        </div>
+        <div className={`legend-item ${score > 10 && score <= 20 ? 'active' : ''}`}>
+          <span className="range">11 - 20</span>
+          <span className="desc">Visible Edits (Dots, Lines, Cropping)</span>
+        </div>
+        <div className={`legend-item ${score > 20 ? 'active' : ''}`}>
+          <span className="range">20+</span>
+          <span className="desc">Significant Modification</span>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 function SearchPage() {
-  // State variables to track user input and search status
-  const [inputHash, setInputHash] = useState('');  // The hash/ID entered by user
-  const [selectedFile, setSelectedFile] = useState(null);  // File uploaded by user (not used yet)
-  const [isSearching, setIsSearching] = useState(false);  // True when search is in progress
-  const [searchError, setSearchError] = useState(null);  // Error message if search fails
-  const navigate = useNavigate();  // Function to navigate to other pages
+  const [searchHash, setSearchHash] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [activeTab, setActiveTab] = useState('hash'); 
+  
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // Function called when user selects a file (not fully implemented)
-  const handleFileSelect = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setSelectedFile(file);
-      setSearchError(null);  // Clear any previous errors
+  const handleHashSearch = async () => {
+    if (!searchHash.trim()) return;
+    setLoading(true);
+    setError(null);
+    setResult(null);
+
+    try {
+      const response = await axios.post(ID_SEARCH_URL, { query_hash: searchHash.trim() });
+      setResult(response.data);
+    } catch (err) {
+      console.error(err);
+      if (err.response?.status === 404) {
+        setError("No record found for this ID.");
+      } else {
+        setError("Search failed. Please check the key.");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Function called when user clicks "Lookup Owner/Status" button
-  const handleSearch = async (searchType) => {
-    // Validation: Make sure user entered a hash
-    if (searchType === 'hash-lookup' && !inputHash.trim()) {
-      setSearchError('Please enter a File Hash or IP ID.');
-      return;
-    }
-    
-    // Validation: Make sure user selected a file (if doing file search)
-    if (searchType === 'file-compare' && !selectedFile) {
-      setSearchError('Please select an image file for comparison.');
-      return;
-    }
+  const handleFileSearch = async () => {
+    if (!selectedFile) return;
+    setLoading(true);
+    setError(null);
+    setResult(null);
 
-    // Show loading state
-    setIsSearching(true);
-    setSearchError(null);
+    const formData = new FormData();
+    formData.append('image', selectedFile);
 
-    // Prepare data to send to backend
-    let endpoint = '';
-    let dataToSend = {};
-    let contentType = 'application/json';
-
-    if (searchType === 'hash-lookup') {
-      // Search by hash key
-      endpoint = `${SEARCH_API_URL}id-lookup/`;
-      dataToSend = { query_hash: inputHash.trim() };
-    } else {
-      // Search by uploading file
-      endpoint = `${SEARCH_API_URL}file-compare/`;
-      const formData = new FormData();
-      formData.append('image', selectedFile);
-      dataToSend = formData;
-      contentType = 'multipart/form-data';
-    }
-
-    // Make API request to backend
     try {
-      const response = await axios.post(endpoint, dataToSend, {
-        headers: { 'Content-Type': contentType },
+      const response = await axios.post(FILE_SEARCH_URL, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
       });
-
-      // If successful, navigate to results page with the data
-      navigate('/result', { state: { result: response.data, searchType: searchType } });
-
-    } catch (error) {
-      // If error, show error message
-      console.error('Search failed:', error);
-      const errorMessage = error.response?.data?.error || 'Search failed due to a server error.';
-      setSearchError(errorMessage);
-      
+      setResult(response.data);
+    } catch (err) {
+      console.error(err);
+      if (err.response?.status === 404) {
+        setError("No visual match found in registry.");
+      } else {
+        setError("Search failed. Please try again.");
+      }
     } finally {
-      // Always turn off loading state when done
-      setIsSearching(false);
+      setLoading(false);
     }
+  };
+
+  const getFullImageUrl = (imagePath) => {
+    if (!imagePath) return null;
+    if (imagePath.startsWith('http')) return imagePath;
+    return `${BASE_URL}${imagePath}`;
   };
 
   return (
-    <div className="page-container">
-      <div className="screen-box">
-        <h2 className="screen-title">Search Registered Works</h2>
-        
-        <div className="content">
-          
-          {/* ========== SEARCH BY HASH SECTION ========== */}
-          <h3 className="section-title">Search by File Hash or IP ID</h3>
-          
-          {/* Input field for hash/ID */}
-          <label className="field-label" htmlFor="hash-input">File Hash / IP ID:</label>
-          <input
-            id="hash-input"
-            type="text"
-            className="text-input"
-            placeholder="Enter unique registered hash or ID"
-            value={inputHash}
-            onChange={(e) => setInputHash(e.target.value)}  // Update state as user types
-            disabled={isSearching}  // Disable while searching
-          />
-          
-          {/* Search button */}
-          <button 
-            className="action-button primary-action" 
-            onClick={() => handleSearch('hash-lookup')}
-            disabled={isSearching || !inputHash.trim()}  // Disable if searching or no input
-          >
-            {isSearching ? 'Looking Up...' : 'Lookup Owner/Status'}
-          </button>
+    <div className="page-container search-layout">
+      
+      {result && (
+        <div className="screen-box certificate-box">
+          <div className="certificate-header">
+            <h3>
+              {result.match_type ? `⚠️ ${result.match_type}` : "✅ Official Record Found"}
+            </h3>
+            <span className="timestamp">Registered: {new Date(result.timestamp || result.date_uploaded).toLocaleString()}</span>
+          </div>
 
-          {/* Divider line */}
-          <hr className="divider" />
-          
-          {/* Show error message if search failed */}
-          {searchError && <p style={{ color: 'red', marginTop: '20px' }}>{searchError}</p>}
+          <div className="certificate-content">
+            <div className="evidence-image-container">
+              {result.image_url || result.registered_image ? (
+                <img 
+                  src={getFullImageUrl(result.image_url || result.registered_image)} 
+                  alt="Registered Work" 
+                  className="evidence-image" 
+                  onError={(e) => {e.target.onerror = null; e.target.src = "https://placehold.co/400x300?text=Image+Not+Found"}}
+                />
+              ) : (
+                <div className="no-image-placeholder">No Image Available</div>
+              )}
+              <p className="caption">Visual Evidence</p>
+            </div>
+
+            <div className="evidence-details">
+              <div className="detail-row">
+                <label>Rights Holder:</label>
+                <div className="verified-name">
+                 {result.legal_name || result.author || "Unknown"}
+                </div>
+              </div>
+
+              <div className="detail-row">
+                <label>Cryptographic Hash:</label>
+                <code className="hash-display">{result.image_hash || result.hash_key}</code>
+              </div>
+
+              <div className="detail-row">
+                <label>AI Training Consent:</label>
+                {result.ai_consent ? (
+                  <div className="consent-badge allowed">
+                    ✅ AUTHORIZED
+                    <small>The rights holder HAS granted permission.</small>
+                  </div>
+                ) : (
+                  <div className="consent-badge denied">
+                    ⛔ PROHIBITED
+                    <small>The rights holder has STRICTLY FORBIDDEN AI use.</small>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+           <DistanceLegend matchType={result.match_type} />
         </div>
+      )}
+
+      <div className="screen-box search-box">
+        <h2 className="screen-title">Registry Lookup</h2>
+        
+        <div style={{display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '2rem'}}>
+            <button 
+                onClick={() => {setActiveTab('hash'); setError(null); setResult(null);}}
+                style={{
+                    padding: '10px 20px', 
+                    border: 'none', 
+                    borderBottom: activeTab === 'hash' ? '3px solid #333' : '3px solid transparent',
+                    background: 'transparent',
+                    fontWeight: 'bold',
+                    cursor: 'pointer'
+                }}
+            >
+                Search by ID
+            </button>
+            <button 
+                onClick={() => {setActiveTab('file'); setError(null); setResult(null);}}
+                style={{
+                    padding: '10px 20px', 
+                    border: 'none', 
+                    borderBottom: activeTab === 'file' ? '3px solid #333' : '3px solid transparent',
+                    background: 'transparent',
+                    fontWeight: 'bold',
+                    cursor: 'pointer'
+                }}
+            >
+                Search by Image (Stolen?)
+            </button>
+        </div>
+
+        <div className="search-bar" style={{flexDirection: 'column'}}>
+          
+          {activeTab === 'hash' ? (
+            <div style={{display: 'flex', gap: '10px'}}>
+                <input
+                    type="text"
+                    className="text-input search-input"
+                    placeholder="e.g. 5dce308c3d2f9..."
+                    value={searchHash}
+                    onChange={(e) => setSearchHash(e.target.value)}
+                />
+                <button className="action-button" onClick={handleHashSearch} disabled={loading}>
+                    {loading ? '...' : 'Verify ID'}
+                </button>
+            </div>
+          ) : (
+            <div style={{display: 'flex', flexDirection: 'column', gap: '15px', alignItems: 'center'}}>
+                <p className="descriptive-text">Upload a suspicious image to check if it's a derivative of registered work.</p>
+                <input 
+                    type="file" 
+                    accept="image/*"
+                    onChange={(e) => setSelectedFile(e.target.files[0])}
+                />
+                <button 
+                    className="action-button" 
+                    onClick={handleFileSearch} 
+                    disabled={loading || !selectedFile}
+                    style={{width: '100%'}}
+                >
+                    {loading ? 'Scanning Registry...' : 'Scan Image'}
+                </button>
+            </div>
+          )}
+
+        </div>
+
+        {error && <div className="error-message">⚠️ {error}</div>}
       </div>
+
     </div>
   );
 }

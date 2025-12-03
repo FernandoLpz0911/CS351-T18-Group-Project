@@ -1,46 +1,31 @@
-/* SignUpPage.css - Styles for the sign up/registration page */
-
-/* ========== SIGN UP BOX ========== */
-/* Slightly wider box to accommodate more fields */
 .signup-box {
   max-width: 500px;
 }
 
-/* ========== SIGN UP FORM ========== */
-/* Container for all form elements */
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;  /* Space between form fields */
+  gap: 1.5rem;
 }
 
-/* ========== FORM GROUPS ========== */
-/* Container for each label + input pair */
-/* (Inherits from LoginPage.css if both are loaded, but defined here for standalone use) */
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;  /* Space between label and input */
+  gap: 0.5rem;
 }
 
-/* ========== FIELD HINT ========== */
-/* Small helper text below input fields (like "Must be at least 8 characters") */
 .field-hint {
   font-size: 0.85rem;
   color: #666;
   font-style: italic;
-  margin-top: -0.25rem;  /* Bring it closer to the input */
+  margin-top: -0.25rem;
 }
 
-/* ========== SIGN UP BUTTON ========== */
-/* Specific styling for create account button */
 .signup-button {
   margin-top: 0.5rem;
-  width: 100%;  /* Full width button */
+  width: 100%;
 }
 
-/* ========== DIVIDER WITH TEXT ========== */
-/* The "or" divider between sign up and login */
 .divider-with-text {
   display: flex;
   align-items: center;
@@ -48,15 +33,13 @@
   margin: 2rem 0;
 }
 
-/* The lines on either side of "or" */
 .divider-with-text::before,
 .divider-with-text::after {
   content: '';
-  flex: 1;  /* Take up equal space */
+  flex: 1;
   border-bottom: 2px solid #333;
 }
 
-/* Space around the "or" text */
 .divider-with-text span {
   padding: 0 1rem;
   color: #666;
@@ -64,8 +47,6 @@
   font-size: 1.1rem;
 }
 
-/* ========== LOGIN SECTION ========== */
-/* Container for "Already have an account?" and Login button */
 .login-section {
   display: flex;
   flex-direction: column;
@@ -73,14 +54,11 @@
   gap: 1rem;
 }
 
-/* "Already have an account?" text */
 .login-text {
   color: #666;
   font-size: 1rem;
 }
 
-/* ========== SECONDARY BUTTON ========== */
-/* The "Login" button (white with border) */
 .secondary-button {
   padding: 1rem 2rem;
   background: white;
@@ -91,10 +69,10 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  text-decoration: none;  /* Remove link underline */
+  text-decoration: none;
   text-align: center;
   display: inline-block;
-  width: 100%;  /* Full width */
+  width: 100%;
 }
 
 .secondary-button:hover {
@@ -102,10 +80,8 @@
   transform: translateY(-2px);
 }
 
-/* ========== RESPONSIVE DESIGN ========== */
-/* Adjustments for mobile devices */
 @media (max-width: 768px) {
   .signup-box {
-    max-width: 100%;  /* Full width on mobile */
+    max-width: 100%;
   }
 }

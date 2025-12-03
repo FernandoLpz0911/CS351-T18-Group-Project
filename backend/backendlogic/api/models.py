@@ -1,10 +1,5 @@
-# used for data objects called models which are essentially another name for database tables
-
-# Use these commands when updating database
-# python manage.py makemigrations api
-# python manage.py migrate
-
 from django.db import models
+from django.contrib.auth.models import User
 
 class Block(models.Model):
     # items to put inside merkle tree
@@ -20,10 +15,19 @@ class Block(models.Model):
     height = models.PositiveIntegerField(unique=True)
 
     registered_image = models.ImageField(upload_to='registered_images/', null=True, blank=True)
+    
+    # SHA-256 for exact file integrity
     image_hash = models.CharField(max_length=64, unique=True, null=True, blank=True)
+
+    # Perceptual Hash for visual similarity
+    perceptual_hash = models.CharField(max_length=64, blank=True, null=True, help_text="pHash for similarity search")
 
     # basic timestamp for image
     timestamp = models.DateTimeField(auto_now_add=True)
 
-def __str__(self):
-        return f"height #{self.height}"
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    legal_name = models.CharField(max_length=255, help_text="Full Legal Name of the Rights Holder")
+    ai_consent = models.BooleanField(default=False, help_text="Do you consent to AI training on this image?")
+
+    def __str__(self):
+        return f"Block #{self.height} - {self.legal_name}"
