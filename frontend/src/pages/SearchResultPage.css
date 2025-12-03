@@ -1,36 +1,26 @@
-/* SearchResultPage.css - Styles specific to the search results page */
-
-/* ========== INFO SECTION ========== */
-/* Container for artwork information (author, date, hash) */
 .info-section {
   border: 2px solid #333;
   border-radius: 4px;
   padding: 1rem;
-  background: #fafafa;  /* Light gray background */
+  background: #fafafa;
 }
 
-/* ========== INFO ROWS ========== */
-/* Each row shows a label and value (like "Author: John Doe") */
 .info-row {
   display: flex;
-  justify-content: space-between;  /* Put label on left, value on right */
+  justify-content: space-between;
   padding: 0.75rem 0;
-  border-bottom: 1px solid #ddd;  /* Light gray line between rows */
+  border-bottom: 1px solid #ddd;
 }
 
-/* Remove border from last row */
 .info-row:last-child {
   border-bottom: none;
 }
 
-/* ========== LABELS AND VALUES ========== */
-/* Label text (like "Author:", "Date uploaded:") */
 .info-label {
   font-weight: bold;
   color: #666;
 }
 
-/* Value text (like "John Doe", "2024-01-15") */
 .info-value {
   color: #666;
 }
