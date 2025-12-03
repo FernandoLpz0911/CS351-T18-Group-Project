@@ -1,5 +1,3 @@
-# api/views.py
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -7,7 +5,7 @@ from rest_framework import viewsets
 
 from django.shortcuts import get_object_or_404
 from .models import Block
-from .serializers import BlockSerializer
+from .serializers import BlockSerializer, UserSerializer
 from .merkleTree import hash_data
 from rest_framework.parsers import JSONParser, MultiPartParser
 from django.db import IntegrityError
@@ -15,9 +13,11 @@ from django.db import IntegrityError
 # imports for user authentication using tokens
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
-from .serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.decorators import action
+
+import imagehash
+from PIL import Image
 
 class RegisterUserView(APIView):
     def post(self, request):
@@ -93,7 +93,7 @@ class IDLookupView(APIView):
             return Response({'error': 'Missing query_hash'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-
+            # find exact match first (sha query)
             block_data = Block.objects.get(image_hash=query_hash) 
             
             # If found, prepare data for the frontend
@@ -101,8 +101,8 @@ class IDLookupView(APIView):
             
             response_data = {
                 'author': block_data.owner.username if block_data.owner else "Unknown",
-                'legal_name': block_data.legal_name,  # Add this
-                'ai_consent': block_data.ai_consent,  # Add this
+                'legal_name': block_data.legal_name,
+                'ai_consent': block_data.ai_consent,
                 'date_uploaded': block_data.timestamp.strftime('%Y-%m-%d %H:%M'),
                 'image_url': block_data.registered_image.url if block_data.registered_image else None,
                 'block_hash': serializer.data['merkle_root'], 
@@ -111,7 +111,6 @@ class IDLookupView(APIView):
             return Response(response_data, status=status.HTTP_200_OK)
 
         except Block.DoesNotExist:
-            # 404 is the correct status if the resource (the block) isn't found
             return Response({'error': f'Item not registered with hash/ID: {query_hash}.'}, 
                             status=status.HTTP_404_NOT_FOUND)
 
@@ -125,28 +124,68 @@ class FileCompareView(APIView):
             return Response({'error': 'Missing image file.'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            # Calculate the hash of the uploaded file content
             file_content = image_file.read() 
-            calculated_hash = hash_data(file_content) # Use your utility function
-
-            # Search the database using the calculated hash
-            block_data = Block.objects.get(image_hash=calculated_hash)
+            calculated_hash = hash_data(file_content)
             
-            # If found, prepare data for the frontend
-            serializer = BlockSerializer(block_data)
+            best_match = None
+            match_type = None
+            
+            try:
+                block_data = Block.objects.get(image_hash=calculated_hash)
+                best_match = block_data
+                match_type = "Exact Match (SHA-256)"
+            except Block.DoesNotExist:
+                print("\n--- Starting Fuzzy Search ---")
+                image_file.seek(0) 
+                try:
+                    target_image = Image.open(image_file)
+                    target_phash = imagehash.phash(target_image)
+                    
+                    min_distance = float('inf')
 
-            response_data = {
-                 'author': block_data.items[0].split(':')[-1].strip(),
-                 'date_uploaded': block_data.timestamp.strftime('%Y-%m-%d %H:%M'),
-                 'image_url': block_data.registered_image.url if block_data.registered_image else None,
-                 'block_hash': serializer.data['merkle_root'], 
-                 'hash_key': block_data.image_hash 
-            }
-            return Response(response_data, status=status.HTTP_200_OK)
+                    SIMILARITY_THRESHOLD = 15  
 
-        except Block.DoesNotExist:
-            return Response({'error': 'File not found. Exact image was not registered.'}, 
-                            status=status.HTTP_404_NOT_FOUND)
+                    all_blocks = Block.objects.exclude(perceptual_hash__isnull=True)
+                    
+                    for block in all_blocks:
+                        if not block.perceptual_hash:
+                            continue
+                            
+                        stored_phash = imagehash.hex_to_hash(block.perceptual_hash)
+                        distance = target_phash - stored_phash 
+                        
+                        print(f"Comparing against Block {block.id}: Distance {distance}")
+
+                        if distance < min_distance:
+                            min_distance = distance
+                            best_match = block
+
+                    if best_match and min_distance <= SIMILARITY_THRESHOLD:
+                        match_type = f"Visual Match (Distance: {min_distance})"
+                    else:
+                        best_match = None
+
+                except Exception as e:
+                    print(f"pHash Error: {e}")
+                    pass
+
+            if best_match:
+                serializer = BlockSerializer(best_match)
+                response_data = {
+                     'author': best_match.owner.username if best_match.owner else "Unknown",
+                     'legal_name': best_match.legal_name,
+                     'ai_consent': best_match.ai_consent,
+                     'date_uploaded': best_match.timestamp.strftime('%Y-%m-%d %H:%M'),
+                     'image_url': best_match.registered_image.url if best_match.registered_image else None,
+                     'block_hash': serializer.data['merkle_root'], 
+                     'hash_key': best_match.image_hash,
+                     'match_type': match_type
+                }
+                return Response(response_data, status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'No matching image found in registry.'}, 
+                                status=status.HTTP_404_NOT_FOUND)
+
         except Exception as e:
             return Response({'error': f'An internal error occurred: {str(e)}'}, 
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR)
