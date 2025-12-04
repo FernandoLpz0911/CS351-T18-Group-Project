@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import './UploadSuccessPage.css';
 
@@ -6,9 +6,13 @@ function UploadSuccessPage() {
   const location = useLocation();
   const [copyStatus, setCopyStatus] = useState('');
   const blockData = location.state?.blockData;
+
+  if (!blockData) {
+    return <Navigate to="/upload" replace />;
+  }
     
-  const imageHash = blockData?.image_hash || 'N/A';
-  const imageUrl = blockData?.registered_image;
+  const imageHash = blockData?.image_hash || blockData?.hash_key || 'N/A';
+  const imageUrl = blockData?.registered_image || blockData?.image_url;
     
   const handleDownload = () => {
     if (imageUrl) {
@@ -22,7 +26,7 @@ function UploadSuccessPage() {
         await navigator.clipboard.writeText(imageHash);
         setCopyStatus('Copied!');
       } catch (err) {
-        setCopyStatus('Failed to copy.');
+        setCopyStatus('Failed');
         console.error('Copy failed:', err);
       }
       setTimeout(() => setCopyStatus(''), 2000);
@@ -31,47 +35,45 @@ function UploadSuccessPage() {
 
   return (
     <div className="page-container">
-      <div className="screen-box">
+      <div className="screen-box success-layout">
         <h2 className="screen-title">Upload Success</h2>
             
         <div className="content">
           <div className="status-box">
-            <p className="status-text">✅ Upload Successful</p>
+            <span className="status-icon">✅</span>
+            <span className="status-text">Registration Complete</span>
           </div>
           
           <div className="info-details">
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '15px' }}>
-              <strong>Image Hash (Key):</strong>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <span title={imageHash} style={{ marginRight: '10px', wordBreak: 'break-all', fontFamily: 'monospace' }}>
-                  {imageHash.substring(0, 10)}...
-                </span>
-                
-                <button
-                  onClick={handleCopyHash}
-                  disabled={imageHash === 'N/A'}
-                  className="copy-button"
-                  style={{
-                    backgroundColor: copyStatus ? '#4CAF50' : '#f0f0f0',
-                    color: copyStatus ? 'white' : 'black',
-                  }}
-                >
-                  {copyStatus || 'Copy'}
-                </button>
-              </div>
+            <label className="field-label">Immutable Hash (Key):</label>
+            <div className="hash-row">
+              <code className="hash-value">
+                {imageHash}
+              </code>
+              
+              <button
+                onClick={handleCopyHash}
+                disabled={imageHash === 'N/A'}
+                className={`copy-button ${copyStatus ? 'copied' : ''}`}
+              >
+                {copyStatus || 'Copy'}
+              </button>
             </div>
           </div>
                 
           <button 
-            className="action-button download"
+            className="action-button download-btn"
             onClick={handleDownload}
             disabled={!imageUrl}
           >
             Download Original File
           </button>
+          
+          <hr className="divider" />
                 
           <div className="nav-links">
             <Link to="/upload" className="nav-link">Register Another</Link>
+            <span className="separator">|</span>
             <Link to="/search" className="nav-link">Search Registry</Link>
           </div>
         </div>

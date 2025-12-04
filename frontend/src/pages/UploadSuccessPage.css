@@ -1,46 +1,110 @@
-.status-box {
-  border: 2px solid #28a745;
-  background: #d4edda;
-  padding: 1.5rem;
-  border-radius: 4px;
+.success-layout {
   text-align: center;
+  max-width: 600px;
+}
+
+.status-box {
+  background-color: #ecfdf5;
+  border: 1px solid #d1fae5;
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.status-icon {
+  font-size: 1.5rem;
 }
 
 .status-text {
   font-size: 1.2rem;
-  font-weight: bold;
-  color: #155724;
+  font-weight: 700;
+  color: #065f46;
 }
 
 .info-details {
-  color: #333;
+  text-align: left;
+  margin-bottom: 1.5rem;
 }
 
-.info-details span,
-.info-details strong {
-  color: #333;
+.hash-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 0.5rem;
 }
 
-.action-button.download {
-  background: #28a745;
-}
-
-.action-button.download:hover {
-  background: #218838;
+.hash-value {
+  flex: 1;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  padding: 10px;
+  border-radius: 6px;
+  font-family: 'Monaco', monospace;
+  font-size: 0.9rem;
+  color: #374151;
+  word-break: break-all;
 }
 
 .copy-button {
-  padding: 5px 10px;
-  font-size: 12px;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
-  background: #f0f0f0;
-  color: black;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
   transition: all 0.2s;
+  min-width: 80px;
 }
 
-.copy-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+.copy-button:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.copy-button.copied {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border-color: #10b981;
+}
+
+.download-btn {
+  background-color: #059669;
+  margin-bottom: 1rem;
+}
+
+.download-btn:hover {
+  background-color: #047857;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+  margin: 1.5rem 0;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+}
+
+.separator {
+  color: #d1d5db;
+}
+
+.nav-links .nav-link {
+  font-weight: 600;
+  color: #059669;
+}
+
+.nav-links .nav-link:hover {
+  text-decoration: underline;
+  color: #047857;
 }

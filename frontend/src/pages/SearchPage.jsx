@@ -40,16 +40,11 @@ const DistanceLegend = ({ matchType }) => {
 function SearchPage() {
   const [searchHash, setSearchHash] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
-  const [activeTab, setActiveTab] = useState('hash');
+  const [activeTab, setActiveTab] = useState('hash'); 
+  
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const resetState = (tab) => {
-    setActiveTab(tab);
-    setError(null);
-    setResult(null);
-  };
 
   const handleHashSearch = async () => {
     if (!searchHash.trim()) return;
@@ -62,7 +57,11 @@ function SearchPage() {
       setResult(response.data);
     } catch (err) {
       console.error(err);
-      setError(err.response?.status === 404 ? "No record found for this ID." : "Search failed. Please check the key.");
+      if (err.response?.status === 404) {
+        setError("No record found for this ID.");
+      } else {
+        setError("Search failed. Please check the key.");
+      }
     } finally {
       setLoading(false);
     }
@@ -84,7 +83,11 @@ function SearchPage() {
       setResult(response.data);
     } catch (err) {
       console.error(err);
-      setError(err.response?.status === 404 ? "No visual match found in registry." : "Search failed. Please try again.");
+      if (err.response?.status === 404) {
+        setError("No visual match found in registry.");
+      } else {
+        setError("Search failed. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -92,15 +95,19 @@ function SearchPage() {
 
   const getFullImageUrl = (imagePath) => {
     if (!imagePath) return null;
-    return imagePath.startsWith('http') ? imagePath : `${BASE_URL}${imagePath}`;
+    if (imagePath.startsWith('http')) return imagePath;
+    return `${BASE_URL}${imagePath}`;
   };
 
   return (
     <div className="page-container search-layout">
+      
       {result && (
         <div className="screen-box certificate-box">
           <div className="certificate-header">
-            <h3>{result.match_type ? `⚠️ ${result.match_type}` : "✅ Official Record Found"}</h3>
+            <h3>
+              {result.match_type ? `⚠️ ${result.match_type}` : "✅ Official Record Found"}
+            </h3>
             <span className="timestamp">Registered: {new Date(result.timestamp || result.date_uploaded).toLocaleString()}</span>
           </div>
 
@@ -122,7 +129,9 @@ function SearchPage() {
             <div className="evidence-details">
               <div className="detail-row">
                 <label>Rights Holder:</label>
-                <div className="verified-name">{result.legal_name || result.author || "Unknown"}</div>
+                <div className="verified-name">
+                 {result.legal_name || result.author || result.owner || result.username || "Unknown"}
+                </div>
               </div>
 
               <div className="detail-row">
@@ -132,10 +141,17 @@ function SearchPage() {
 
               <div className="detail-row">
                 <label>AI Training Consent:</label>
-                <div className={`consent-badge ${result.ai_consent ? 'allowed' : 'denied'}`}>
-                  {result.ai_consent ? '✅ AUTHORIZED' : '⛔ PROHIBITED'}
-                  <small>{result.ai_consent ? 'The rights holder HAS granted permission.' : 'The rights holder has STRICTLY FORBIDDEN AI use.'}</small>
-                </div>
+                {result.ai_consent ? (
+                  <div className="consent-badge allowed">
+                    ✅ AUTHORIZED
+                    <small>The rights holder HAS granted permission.</small>
+                  </div>
+                ) : (
+                  <div className="consent-badge denied">
+                    ⛔ PROHIBITED
+                    <small>The rights holder has STRICTLY FORBIDDEN AI use.</small>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -147,32 +163,44 @@ function SearchPage() {
         <h2 className="screen-title">Registry Lookup</h2>
         
         <div className="search-tabs">
-            <button className={`tab-button ${activeTab === 'hash' ? 'active' : ''}`} onClick={() => resetState('hash')}>
+            <button 
+                className={`tab-button ${activeTab === 'hash' ? 'active' : ''}`}
+                onClick={() => {setActiveTab('hash'); setError(null); setResult(null);}}
+            >
                 Search by ID
             </button>
-            <button className={`tab-button ${activeTab === 'file' ? 'active' : ''}`} onClick={() => resetState('file')}>
+            <button 
+                className={`tab-button ${activeTab === 'file' ? 'active' : ''}`}
+                onClick={() => {setActiveTab('file'); setError(null); setResult(null);}}
+            >
                 Search by Image (Stolen?)
             </button>
         </div>
 
-        <div className="search-bar" style={{flexDirection: 'column'}}>
+        <div className="search-content-area">
+          
           {activeTab === 'hash' ? (
-            <div style={{display: 'flex', gap: '10px'}}>
+            <div className="search-actions row-layout">
                 <input
                     type="text"
-                    className="text-input search-input"
+                    className="search-input"
                     placeholder="e.g. 5dce308c3d2f9..."
                     value={searchHash}
                     onChange={(e) => setSearchHash(e.target.value)}
                 />
-                <button className="action-button" onClick={handleHashSearch} disabled={loading}>
+                <button className="action-button search-btn" onClick={handleHashSearch} disabled={loading}>
                     {loading ? '...' : 'Verify ID'}
                 </button>
             </div>
           ) : (
-            <div style={{display: 'flex', flexDirection: 'column', gap: '15px', alignItems: 'center'}}>
+            <div className="search-actions col-layout">
                 <p className="descriptive-text">Upload a suspicious image to check if it's a derivative of registered work.</p>
-                <input type="file" accept="image/*" onChange={(e) => setSelectedFile(e.target.files[0])} />
+                <input 
+                    type="file" 
+                    accept="image/*"
+                    onChange={(e) => setSelectedFile(e.target.files[0])}
+                    style={{width: '100%'}}
+                />
                 <button 
                     className="action-button" 
                     onClick={handleFileSearch} 
@@ -183,10 +211,12 @@ function SearchPage() {
                 </button>
             </div>
           )}
+
         </div>
 
         {error && <div className="error-message">⚠️ {error}</div>}
       </div>
+
     </div>
   );
 }
