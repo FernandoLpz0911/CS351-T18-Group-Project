@@ -1,78 +1,66 @@
-/* App.css - Main stylesheet for the entire application */
-/* This file contains styles that are shared across all pages */
-
-/* ========== GLOBAL RESETS ========== */
-/* Remove default margins/padding and use border-box sizing everywhere */
+/* Global Resets */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ========== BODY STYLES ========== */
-/* Set font and background for the whole page */
+/* Body Styles */
 body {
   font-family: Arial, sans-serif;
-  background: #f0f0f0;  /* Light gray background */
+  background: #f0f0f0;
   width: 100%;
 }
 
-/* ========== MAIN APP CONTAINER ========== */
-/* Makes the app take up at least the full screen height */
+/* Main App Container */
 .App {
-  min-height: 100vh;  /* vh = viewport height, 100vh = full screen */
+  min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-/* ========== NAVBAR STYLES ========== */
-/* Top navigation bar that's always visible */
+/* Navbar Styles */
 .navbar {
   background: white;
-  padding: 1rem 2rem;  /* rem = relative unit, 1rem = 16px typically */
-  border-bottom: 2px solid #333;  /* #333 = dark gray/black */
+  padding: 1rem 2rem;
+  border-bottom: 2px solid #333;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   position: relative;
-  z-index: 100;  /* Make sure navbar stays on top of other elements */
+  z-index: 100;
 }
 
-/* Container for hamburger button and brand name */
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 1rem;  /* Space between items */
+  gap: 1rem;
 }
 
-/* Brand name styling */
 .navbar h1 {
   font-size: 1.5rem;
   color: #333;
 }
 
-/* ========== HAMBURGER MENU BUTTON ========== */
-/* The button with three horizontal lines that opens the sidebar */
+/* Hamburger Menu Button */
 .menu-button {
   background: none;
   border: 2px solid #333;
   padding: 0.5rem;
-  cursor: pointer;  /* Show hand cursor on hover */
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 4px;  /* Space between the three lines */
+  gap: 4px;
   border-radius: 4px;
-  transition: all 0.3s;  /* Smooth animation for hover effects */
+  transition: all 0.3s;
 }
 
-/* When you hover over the hamburger button, it turns dark */
 .menu-button:hover {
   background: #333;
 }
 
-/* Each horizontal line in the hamburger icon */
 .menu-icon {
   width: 24px;
   height: 3px;
@@ -80,35 +68,31 @@ body {
   transition: all 0.3s;
 }
 
-/* When hovering, the lines turn white (because button is now dark) */
 .menu-button:hover .menu-icon {
   background: white;
 }
 
-/* ========== SIDEBAR MENU ========== */
-/* The sliding menu that comes from the left side */
+/* Sidebar Menu */
 .sidebar {
-  position: fixed;  /* Stay in place when scrolling */
+  position: fixed;
   top: 0;
-  left: -320px;  /* Hidden off-screen to the left */
+  left: -320px;
   width: 300px;
-  height: 100vh;  /* Full screen height */
+  height: 100vh;
   background: white;
   border-right: 3px solid #333;
-  box-shadow: 8px 0 16px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
-  z-index: 1000;  /* Appear above everything else */
-  transition: left 0.3s ease-in-out;  /* Smooth sliding animation */
+  box-shadow: 8px 0 16px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: left 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
 }
 
-/* When menu is open, move it to left: 0 (visible on screen) */
 .sidebar.open {
   left: 0;
 }
 
-/* ========== SIDEBAR HEADER ========== */
-/* Top section of sidebar with "Menu" title and X button */
+/* Sidebar Header */
 .sidebar-header {
   display: flex;
   justify-content: space-between;
@@ -122,7 +106,6 @@ body {
   color: #333;
 }
 
-/* The X button that closes the menu */
 .close-button {
   background: none;
   border: 2px solid #333;
@@ -139,52 +122,46 @@ body {
   transition: all 0.3s;
 }
 
-/* When hovering over X button, it inverts colors */
 .close-button:hover {
   background: #333;
   color: white;
 }
 
-/* ========== SIDEBAR NAVIGATION LINKS ========== */
-/* The main navigation section with Home, Search, Register */
+/* Sidebar Navigation */
 .sidebar-nav {
-  flex: 1;  /* Take up all remaining space */
+  flex: 1;
   display: flex;
   flex-direction: column;
   padding: 1rem 0;
 }
 
-/* Each individual navigation link */
 .sidebar-nav a {
   color: #333;
-  text-decoration: none;  /* Remove underline */
+  text-decoration: none;
   padding: 1.25rem 1.5rem;
   font-size: 1.1rem;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 1rem;  /* Space between emoji icon and text */
+  gap: 1rem;
   transition: all 0.3s;
-  border-left: 4px solid transparent;  /* Invisible border by default */
+  border-left: 4px solid transparent;
 }
 
-/* When hovering over a link, show gray background and left border */
 .sidebar-nav a:hover {
   background: #f0f0f0;
-  border-left-color: #333;  /* Make left border visible */
+  border-left-color: #333;
 }
 
-/* The emoji icons (🏠 🔍 📝) */
 .menu-icon-text {
   font-size: 1.5rem;
 }
 
-/* ========== SIDEBAR FOOTER ========== */
-/* Bottom section with branding */
+/* Sidebar Footer */
 .sidebar-footer {
   padding: 1.5rem;
   border-top: 2px solid #333;
-  background: #fafafa;  /* Slightly off-white */
+  background: #fafafa;
 }
 
 .sidebar-footer p {
@@ -193,60 +170,50 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* The tagline text */
 .sidebar-tagline {
   font-size: 0.9rem;
-  font-weight: normal !important;  /* Override parent bold */
-  color: #666 !important;  /* Gray color */
+  font-weight: normal !important;
+  color: #666 !important;
   font-style: italic;
 }
 
-/* ========== DARK OVERLAY ========== */
-/* Semi-transparent background that appears when menu is open */
+/* Overlay */
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);  /* Black at 50% transparency */
-  z-index: 999;  /* Below sidebar but above page content */
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
   animation: fadeIn 0.3s;
 }
 
-/* Animation for overlay fading in */
 @keyframes fadeIn {
-  from {
-    opacity: 0;  /* Start invisible */
-  }
-  to {
-    opacity: 1;  /* End fully visible */
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* ========== PAGE LAYOUT ========== */
-/* Container for each page's content */
+/* Page Layout */
 .page-container {
   padding: 3rem 2rem;
   display: flex;
-  justify-content: center;  /* Center content horizontally */
-  align-items: center;  /* Center content vertically */
-  min-height: calc(100vh - 80px);  /* Full height minus navbar */
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
   width: 100%;
 }
 
-/* White box that contains page content */
 .screen-box {
   background: white;
   border: 3px solid #333;
-  border-radius: 8px;  /* Rounded corners */
+  border-radius: 8px;
   padding: 2rem;
   width: 100%;
-  max-width: 600px;  /* Don't get too wide on large screens */
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);  /* Drop shadow effect */
+  max-width: 600px;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
-/* Page title (like "Search Registered Works") */
 .screen-title {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
@@ -255,30 +222,26 @@ body {
   padding-bottom: 0.5rem;
 }
 
-/* Container for page content */
 .content {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;  /* Space between elements */
+  gap: 1.5rem;
 }
 
-/* ========== TEXT STYLES ========== */
-/* Labels for form fields like "Author Name:" */
+/* Text Styles */
 .field-label {
   font-weight: bold;
   font-size: 1.1rem;
 }
 
-/* Italic centered text for instructions */
 .descriptive-text {
   font-size: 1.1rem;
   font-style: italic;
   text-align: center;
-  color: #666;  /* Gray text */
+  color: #666;
 }
 
-/* ========== IMAGE DISPLAY ========== */
-/* Box for showing image previews */
+/* Image Display */
 .image-box {
   border: 2px solid #333;
   min-height: 200px;
@@ -289,26 +252,22 @@ body {
   border-radius: 4px;
 }
 
-/* Larger version of image box */
 .image-box.large {
   min-height: 300px;
 }
 
-/* Placeholder text when no image is selected */
 .placeholder {
-  color: #999;  /* Light gray */
+  color: #999;
   font-size: 1.2rem;
 }
 
-/* Actual image preview */
 .preview-image {
   max-width: 100%;
   max-height: 200px;
-  object-fit: contain;  /* Keep aspect ratio */
+  object-fit: contain;
 }
 
-/* ========== BUTTONS ========== */
-/* File selection button (white with border) */
+/* Buttons */
 .file-button {
   padding: 0.75rem 1.5rem;
   background: white;
@@ -320,13 +279,11 @@ body {
   transition: all 0.3s;
 }
 
-/* When hovering, invert colors */
 .file-button:hover {
   background: #333;
   color: white;
 }
 
-/* Main action button (like "Upload & Register") */
 .action-button {
   padding: 1rem 2rem;
   background: #333;
@@ -339,21 +296,18 @@ body {
   transition: all 0.3s;
 }
 
-/* When hovering, lighten and lift up slightly */
 .action-button:hover {
   background: #555;
-  transform: translateY(-2px);  /* Move up 2 pixels */
+  transform: translateY(-2px);
 }
 
-/* When button is disabled (can't be clicked) */
 .action-button:disabled {
-  opacity: 0.5;  /* Make it look faded */
-  cursor: not-allowed;  /* Show "not allowed" cursor */
-  transform: none;  /* Don't lift up on hover */
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
 }
 
-/* ========== LINKS ========== */
-/* Back links and navigation links */
+/* Links */
 .back-link,
 .nav-link {
   color: #333;
@@ -364,21 +318,17 @@ body {
   transition: all 0.3s;
 }
 
-/* Lighten color when hovering */
 .back-link:hover,
 .nav-link:hover {
   color: #666;
 }
 
-/* ========== RESPONSIVE DESIGN ========== */
-/* Adjustments for mobile devices (screens smaller than 768px) */
+/* Responsive Design */
 @media (max-width: 768px) {
-  /* Smaller brand name on mobile */
   .navbar h1 {
     font-size: 1.2rem;
   }
 
-  /* Less padding on mobile */
   .page-container {
     padding: 2rem 1rem;
   }
@@ -388,11 +338,9 @@ body {
   }
 }
 
-/* Adjustments for desktop/tablet (screens 769px and larger) */
 @media (min-width: 769px) {
-  /* Slightly wider sidebar on desktop */
   .sidebar {
     width: 320px;
-    left: -340px;  /* Hide further off-screen */
+    left: -340px;
   }
 }

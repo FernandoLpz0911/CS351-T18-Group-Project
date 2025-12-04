@@ -11,6 +11,8 @@
   padding: 2rem 2.5rem;
   border-bottom: 1px solid #eee;
   background-color: #fff;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .dashboard-header .screen-title {
@@ -31,6 +33,7 @@
   font-size: 0.95rem;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  white-space: nowrap;
 }
 
 .primary-action-btn:hover {
@@ -111,6 +114,9 @@
   font-size: 0.9rem;
   color: #444;
   border: 1px solid #e1e4e8;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .copy-icon-btn {
@@ -158,4 +164,67 @@
 .td-date {
   color: #666;
   font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .primary-action-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .registry-table, .registry-table tbody, .registry-table tr, .registry-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .registry-table thead {
+    display: none;
+  }
+
+  .registry-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 1rem;
+  }
+
+  .registry-table td {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+  }
+
+  .registry-table td:last-child {
+    border-bottom: none;
+  }
+
+  .registry-table td:first-child {
+    justify-content: center;
+    background: #f9f9f9;
+    margin: -1rem -1rem 1rem -1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .table-thumb {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+  }
+
+  .hash-wrapper {
+    flex-direction: column;
+    align-items: flex-end;
+  }
 }
