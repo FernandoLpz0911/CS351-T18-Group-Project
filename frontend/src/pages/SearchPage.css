@@ -26,7 +26,7 @@
 }
 
 .certificate-box {
-  max-width: 1000px;
+  max-width: 900px;
   width: 100%;
   border-top: 5px solid #2e7d32;
   animation: slideDown 0.5s ease-out;
@@ -68,7 +68,7 @@
 
 .evidence-image-container {
   flex: 1;
-  min-width: 250px;
+  min-width: 300px;
   background-color: #f9f9f9;
   padding: 15px;
   border-radius: 8px;
@@ -82,11 +82,10 @@
 
 .evidence-image {
   max-width: 100%;
-  max-height: 300px;
+  max-height: 400px;
   width: auto;
-  height: auto;
   border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   object-fit: contain;
 }
 
@@ -236,7 +235,7 @@
 .legend-item.active {
   opacity: 1;
   border: 2px solid #333;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
@@ -251,81 +250,71 @@
   color: #666;
 }
 
-.comparison-container {
+.search-tabs {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  gap: 20px;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #eee;
 }
 
-.comparison-container .evidence-image-container {
-  flex: 1;
-  width: 45%;
-}
-
-.match-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #d32f2f;
+.tab-button {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
   font-weight: bold;
-  animation: pulse 1.5s infinite;
-  min-width: 80px;
+  cursor: pointer;
+  color: #666;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s;
+  font-size: 1rem;
 }
 
-.match-indicator .arrow {
-  font-size: 2.5rem;
-  line-height: 1;
+.tab-button:hover {
+  color: #333;
 }
 
-.image-label {
-  background: #333;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  font-weight: bold;
-  width: 100%;
-  text-align: center;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.1); opacity: 0.8; }
-  100% { transform: scale(1); opacity: 1; }
+.tab-button.active {
+  color: #333;
+  border-bottom: 3px solid #333;
 }
 
 @media (max-width: 768px) {
-  .certificate-content,
-  .comparison-container {
+  .certificate-content {
     flex-direction: column;
   }
   
-  .evidence-image-container, .evidence-details {
+  .evidence-image-container, 
+  .evidence-details {
     width: 100%;
   }
   
-  .match-indicator .arrow {
-    transform: rotate(90deg);
-    margin: 15px 0;
-  }
-  
-  .comparison-container .evidence-image-container {
-    width: 100%;
-  }
-  
-  .search-box > div:first-child {
+  .search-tabs {
     flex-direction: column;
     gap: 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: none;
   }
-  
-  .search-box button {
+
+  .tab-button {
     width: 100%;
     padding: 15px;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid #eee;
+    border-left: 4px solid transparent;
+  }
+
+  .tab-button.active {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    border-left: 4px solid #333;
+  }
+  
+  .search-bar {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .search-input, 
+  .action-button {
+    width: 100%;
   }
 }
